@@ -38,7 +38,7 @@ class Ekstrakurikuler extends CI_Controller {
             $this->template->load('template', 'ekstrakurikuler/ekstrakurikuler_form', $data);
         } else {
             echo "<script>alert('data berhasil di simpan');</script>";
-            echo "<script>window.location='" . site_url('ekstrakurikuler') . "';</script>";
+            redirect('ekstrakurikuler');
         }
     }
 
@@ -52,7 +52,7 @@ class Ekstrakurikuler extends CI_Controller {
         if ($this->db->affected_rows() > 0) {
             echo "<script>alert('data berhasil di simpan');</script>";
         }
-        echo "<script>window.location='" . site_url('ekstrakurikuler') . "';</script>";
+        redirect('ekstrakurikuler');
     }
 
     public function delete() {
@@ -62,7 +62,7 @@ class Ekstrakurikuler extends CI_Controller {
         if ($this->db->affected_rows() > 0) {
             echo "<script>alert('data berhasil di hapus');</script>";
         }
-        echo "<script>window.location='" . site_url('ekstrakurikuler') . "';</script>";
+        redirect('ekstrakurikuler');
     }
 
     public function cetak() {

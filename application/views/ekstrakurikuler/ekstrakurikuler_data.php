@@ -13,8 +13,8 @@
         <div class="box-header">
             <h3 class="box-title">Data Ekstrakurikuler</h3>
             <div class="pull-right">
-                <a href="<?= site_url('ekstrakurikuler/add') ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Tambah data</a>
-                <a href="<?= site_url('ekstrakurikuler/cetak') ?>" class="btn btn-info btn-flat"><i class="fa fa-print"></i> Cetak data</a>
+                <a href="<?= site_url('ekstrakurikuler/add') ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah data</a>
+                <a href="<?= site_url('ekstrakurikuler/cetak') ?>" class="btn btn-info"><i class="fa fa-print"></i> Cetak data</a>
             </div>
         </div>
         <div class="box-body table-responsive">

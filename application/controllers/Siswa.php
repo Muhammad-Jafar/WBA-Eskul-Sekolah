@@ -42,7 +42,7 @@ class Siswa extends CI_Controller {
             if ($this->db->affected_rows() > 0) {
                 echo "<script>alert('data berhasil di simpan');</script>";
             }
-            echo "<script>window.location='" . site_url('siswa') . "';</script>";
+            redirect('siswa');
         }
     }
 
@@ -68,13 +68,13 @@ class Siswa extends CI_Controller {
                 $this->template->load('template', 'siswa/siswa_edit', $data);
             } else {
                 echo "<script>alert('data tidak ditemukan');</script>";
-                echo "<script>window.location='" . site_url('siswa') . "';</script>";
+                redirect('siswa');
             }
         } else {
             $post = $this->input->post(null, TRUE);
             $this->siswa_model->edit($post);
             if ($this->db->affected_rows() > 0) { echo "<script>alert('data berhasil di simpan');</script>"; }
-            echo "<script>window.location='" . site_url('siswa') . "';</script>";
+            redirect('siswa');
         }
     }
 
@@ -96,7 +96,7 @@ class Siswa extends CI_Controller {
         if ($this->db->affected_rows() > 0) {
             echo "<script>alert('data berhasil di hapus');</script>";
         }
-        echo "<script>window.location='" . site_url('siswa') . "';</script>";
+        redirect('siswa');
     }
 
     public function cetak() {

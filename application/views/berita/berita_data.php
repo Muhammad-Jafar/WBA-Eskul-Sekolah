@@ -40,7 +40,6 @@
                             <td class="text-center" width="160px">
                                 <form action="<?= site_url('berita/delete') ?>" method="post">
                                     <a href="<?= site_url('berita/edit/' . $data->id_berita) ?>" class="btn btn-primary btn-s"><i class="fa fa-pencil"></i></a>
-
                                     <input type="hidden" name="id_berita" value="<?= $data->id_berita ?>">
                                     <button onclick="return confirm('apakah anda ingin menghapus data ini ?')" class="btn btn-danger btn-s"><i class="fa fa-trash"></i></a>
                                     </button>
