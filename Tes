@@ -1,9 +1,0 @@
- mainViewModel.let {
-   it.getStories() // Ini manggil API
-   it.loadDataResult.observe(this) { result ->
-         adapter.setData(result.listStory)
-   } // ini result kalo berhasil
-   it.error.observe(this) { errorState ->
-         do your action
-   } // errornya disimpan disini
-}
