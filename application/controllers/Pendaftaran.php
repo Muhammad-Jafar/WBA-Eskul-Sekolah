@@ -37,14 +37,12 @@ class Pendaftaran extends CI_Controller {
     }
 
     /* PEMBINA PROSES */
-    public function accept() {
-        $id = $this->input->post('id_pendaftaran');
+    public function accept($id) {
         $this->pendaftaran_model->accept($id);
         redirect('pendaftaran');
     }
 
-    public function reject() {
-        $id = $this->input->post('id_pendaftaran');
+    public function reject($id) {
         $this->pendaftaran_model->reject($id);
         redirect('pendaftaran');
     }

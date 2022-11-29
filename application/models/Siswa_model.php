@@ -9,7 +9,7 @@ class Siswa_model extends CI_Model {
         $query = $this->db->get();
         return $query;
     }
-
+    
     public function add($post) {
         $params = [
             'nama_siswa'    => $post['nama_siswa'],

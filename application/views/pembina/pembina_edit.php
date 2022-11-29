@@ -45,7 +45,7 @@
                             <select name="id_ekskul" value="<?= $row->id_ekskul; set_value('id_ekskul') ?>" class="form-control">
                               <option disabled selected>Silahkan Pilih Jenis Eskul</option>
                               <?php foreach($jenis_eskul as $eskul) : ?>
-                                <option value="<?=$row->id_ekskul;?>" <?=( ($row->id_ekskul==$eskul->id_ekskul) ? 'selected' : '');?>><?=$eskul->nama_ekskul;?></option>
+                                <option value="<?=$eskul->id_ekskul;?>" <?=( ($row->id_ekskul==$eskul->id_ekskul) ? 'selected' : '');?>><?=$eskul->nama_ekskul;?></option>
                                 <?php endforeach; ?>
                             </select>
                             <?= form_error('id_ekskul') ?>

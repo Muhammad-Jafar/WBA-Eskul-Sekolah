@@ -39,6 +39,21 @@ class Pendaftaran_model extends CI_Model {
         return $q;
     }
 
+    /* PEMBINA PROSES */
+    public function accept($id) {
+        $params = ['status_pendaftaran' => 'LULUS'];
+        $this->db->where('id_pendaftaran', $id)->update('pendaftaran', $params);    
+    }
+
+    public function reject($id) {
+        $params = ['status_pendaftaran' => 'TIDAK LULUS'];
+        $this->db->where('id_pendaftaran', $id)->update('pendaftaran', $params);
+    }
+
+    public function delete($id) {
+        $this->db->where('id_pendaftaran', $id)->delete('pendaftaran');
+    }
+
     /* SISWA PROSES */
     public function add($post) {
         $pendaftaran = [
@@ -51,20 +66,5 @@ class Pendaftaran_model extends CI_Model {
     public function edit($post) {
         $params = [ 'id_ekskul' => $post['ekstrakurikuler'] ];
         $this->db->where('id_pendaftaran', $post['id_pendaftaran'])->update('pendaftaran', $params);
-    }
-
-    /* PEMBINA PROSES */
-    public function accept($id) {
-        $params = ['status_pendaftaran' => $id['LULUS'] ];
-        $this->db->where('id_pendaftaran', $id)->update('pendaftaran', $params);    
-    }
-
-    public function reject($id) {
-        $params = ['status_pendaftaran' => $id['TIDAK LULUS'] ];
-        $this->db->where('id_pendaftaran', $id)->update('pendaftaran', $params);
-    }
-
-    public function delete($id) {
-        $this->db->where('id_pendaftaran', $id)->delete('pendaftaran');
     }
 }

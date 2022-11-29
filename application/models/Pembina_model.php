@@ -8,7 +8,7 @@ class Pembina_model extends CI_Model {
     }
 
     public function get($id = null) {
-        $this->db->select('p.id_ekskul, je.nama_ekskul');
+        $this->db->select('p.*, je.nama_ekskul');
         $this->db->from('pembina as p');
         $this->db->join('jenis_eskul as je', 'je.id_ekskul = p.id_ekskul');
         if ($id != null) {

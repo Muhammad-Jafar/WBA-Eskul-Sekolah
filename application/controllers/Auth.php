@@ -43,50 +43,6 @@ class Auth extends CI_Controller {
             $this->load->view('login');
         }
     }
-    // if (isset($post['login'])) {
-    //     $this->load->model('admin_model');
-    //     $query = $this->admin_model->login($post);
-    //     if ($query->num_rows() > 0) {
-    //         $row = $query->row();
-    //         $params = array(
-    //             'id_admin' => $row->id_admin,
-    //             'id_level' => $row->id_level
-    //         );
-    //         $this->session->set_userdata($params);
-    //         echo "<script>
-    //         alert('selamat, login berhasil');
-    //         window.location='" . site_url('dashboard') . "';
-    //         </script>";
-    //     } else {
-    //         echo "<script>
-    //         alert('login gagal, username atau password salah');
-    //         window.location='" . site_url('auth/login') . "';
-    //         </script>";
-    //     }
-    // }
-
-    // $post = $this->input->post(null, TRUE);
-    // if (isset($post['login'])) {
-    //     $this->load->model('pembina_model');
-    //     $query = $this->pembina_model->pembina_login($post);
-    //     if ($query->num_rows() > 0) {
-    //         $row = $query->row();
-    //         $params = array(
-    //             'id_pembina' => $row->id_pembina,
-    //             'id_level' => $row->id_level
-    //         );
-    //         $this->session->set_userdata($params);
-    //         echo "<script>
-    //         alert('selamat, login berhasil');
-    //         window.location='" . site_url('dashboard') . "';
-    //         </script>";
-    //     } else {
-    //         echo "<script>
-    //         alert('login gagal bro, username atau password salah');
-    //         window.location='" . site_url('auth/login') . "';
-    //         </script>";
-    //     }
-    // }
 
     //fungsi logout diganti
     public function logout() {
@@ -95,7 +51,7 @@ class Auth extends CI_Controller {
         });
 
         $this->session->sess_destroy();
-        $params = array('id_level');
+        $params = ['id_level'];
         $this->session->unset_userdata($params);
         redirect('auth/login');
     }
