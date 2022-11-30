@@ -4,43 +4,33 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Presensi extends CI_Controller {
     function __construct() {
         parent::__construct();
-        $this->load->model(['absen_model', 'pendaftaran_model']);
+        $this->load->model(['presensi_model', 'pendaftaran_model']);
     }
 
     public function index() {
-        $data['row'] = $this->absen_model->get();
-        $data['get_absen'] = $this->absen_model->get_absen();
-
-        $this->template->load('template', 'absen/absen_data', $data);
+        $data['set_presensi'] = $this->presensi_model->pembina_set_presensi();
+        $data['check_presensi'] = $this->presensi_model->check_presensi_siswa();
+        $data['get_eskul'] = $this->presensi_model->siswa_get_eskul();
+        $data['get_presensi'] = $this->presensi_model->siswa_get_presensi();
+        $this->template->load('template', 'presensi/presensi_data', $data);
     }
 
     public function add() {
         $absen = new stdClass();
         $absen->id_absen = null;
-
-        $data = array(
-            'page' => 'add',
-            'row' => $this->pendaftaran_model->get()
-
-        );
-
-        $this->template->load('template', 'absen/absen_form', $data);
+        $data = ['page' => 'add', 'row' => $this->pendaftaran_model->get() ];
+        $this->template->load('template', 'presensi/presensi_form', $data);
     }
 
     public function edit($id) {
         $query = $this->absen_model->get($id);
         if ($query->num_rows() > 0) {
             $absen = $query->row();
-
-            $data = array(
-                'page' => 'edit',
-                'row' => $absen,
-            );
-
-            $this->template->load('template', 'absen/absen_form', $data);
+            $data = [ 'page' => 'edit', 'row' => $absen ];
+            $this->template->load('template', 'presensi/presensi_form', $data);
         } else {
             echo "<script>alert('data berhasil di simpan');</script>";
-            echo "<script>window.location='" . site_url('absen') . "';</script>";
+            redirect('presensi');
         }
     }
 
@@ -52,9 +42,9 @@ class Presensi extends CI_Controller {
             $this->absen_model->edit($post);
         }
         if ($this->db->affected_rows() > 0) {
-            echo "<script>alert('data berhasil di simpan');</script>";
+            echo "<script>alert('data berhasil di simpan');</scrsite_url>";
         }
-        echo "<script>window.location='" . site_url('absen') . "';</script>";
+        redirect('presensi');
     }
 
     public function delete() {
@@ -64,6 +54,6 @@ class Presensi extends CI_Controller {
         if ($this->db->affected_rows() > 0) {
             echo "<script>alert('data berhasil di hapus');</script>";
         }
-        echo "<script>window.location='" . site_url('absen') . "';</script>";
+        redirect('presensi');
     }
 }

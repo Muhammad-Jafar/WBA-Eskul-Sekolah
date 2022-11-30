@@ -114,7 +114,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="<?= site_url('absen') ?>">
+                                <a href="<?= site_url('presensi') ?>">
                                     <i class="fa fa-file"></i>
                                     <span>Data Presensi</span>
                                 </a>
@@ -135,22 +135,21 @@
                                     <span>Data Ekskul</span>
                                 </a>
                             </li>
-                            <?php
-                            $id_siswa = $this->session->userdata('user_id');
-                            $cek_eskul = $this->session->userdata('cek_eskul');
-                            if ( $id_siswa == $cek_eskul) :?>
-                            <li>
-                                <a href="<?= site_url('absen') ?>">
-                                    <i class="fa fa-file"></i>
-                                    <span>Absensi</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?= site_url('nilai') ?>">
-                                    <i class="fa fa-file"></i>
-                                    <span>Nilai Akhir</span>
-                                </a>
-                            </li>
+                            <?php $id_siswa = $this->session->userdata('user_id');
+                                  $cek_eskul = $this->session->userdata('cek_eskul');
+                                  if ( $id_siswa == $cek_eskul) : ?>
+                                <li>
+                                    <a href="<?= site_url('presensi') ?>">
+                                        <i class="fa fa-file"></i>
+                                        <span>Absensi</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?= site_url('nilai') ?>">
+                                        <i class="fa fa-file"></i>
+                                        <span>Nilai Akhir</span>
+                                    </a>
+                                </li>
                             <?php else : ?>
                                 <li>
                                     <a href="#" onclick="return confirm('Silahkan daftar eskul terlebih dahulu!')">
@@ -185,5 +184,20 @@
 
         <script> $(document).ready(function() { $('.sidebar-menu').tree() }) </script>
         <script> $(document).ready(function() { $('#datatable').DataTable() }) </script>
+        <script>
+            function openCity(evt, cityName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("city");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.firstElementChild.className += " w3-border-red";
+            }
+        </script>
     </body>
 </html>

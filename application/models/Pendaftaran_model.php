@@ -10,7 +10,7 @@ class Pendaftaran_model extends CI_Model {
                     ->join('siswa as s', 's.id_siswa = p.id_siswa', 'LEFT')
                     ->join('jenis_eskul as je', 'je.id_ekskul = p.id_ekskul', 'LEFT')
                     ->where('p.id_ekskul', $id_ekskul)
-                    ->where('status_pendaftaran', 'BELUM SELEKSI')->get();
+                    ->order_by('status_pendaftaran', 'BELUM SELEKSI')->get();
         if ($id != null) { $this->db->where('id_pendaftaran', $id); }
         return $q;
     }

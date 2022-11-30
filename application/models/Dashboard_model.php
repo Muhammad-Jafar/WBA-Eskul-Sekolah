@@ -35,7 +35,7 @@ class Dashboard_model extends CI_Model {
                  ->join('siswa as s', 's.id_siswa = p.id_siswa', 'LEFT')
                  ->join('jenis_eskul as je', 'je.id_ekskul = p.id_ekskul', 'LEFT')
                  ->where('p.status_pendaftaran', 'LULUS')
-                 ->where('p.id_siswa', $id)->get();
+                 ->where('p.id_siswa', $id)->get()->result();
         return $q;
     }
 
@@ -47,7 +47,7 @@ class Dashboard_model extends CI_Model {
                  ->join('jenis_eskul as je', 'je.id_ekskul = p.id_ekskul', 'LEFT')
                  ->join('pembina as pm', 'pm.id_ekskul = p.id_ekskul','pm.id_ekskul = je.id_ekskul', 'LEFT')
                  ->where('p.status_pendaftaran', 'LULUS')
-                 ->where('p.id_siswa', $id)->get();
+                 ->where('p.id_siswa', $id)->get()->result();
         return $q;
     }
 

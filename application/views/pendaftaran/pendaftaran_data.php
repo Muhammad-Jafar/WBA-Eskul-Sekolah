@@ -29,9 +29,15 @@
                             <td><?= $data->kelas ?></td>
                             <td><?= $data->nama_ekskul ?></td>
                             <td><?= date_format( date_create($data->tanggal_pendaftaran), 'd - M - Y');  ?></td>
-                            <td width="15%">
-                                <a href="<?= site_url('pendaftaran/accept/' . $data->id_pendaftaran) ?>" class="btn btn-success btn-s"><i class="fa fa-check"></i> Terima</a>
-                                <a href="<?= site_url('pendaftaran/reject/' . $data->id_pendaftaran) ?>" class="btn btn-danger btn-s"><i class="fa fa-close"></i> Tolak</a>
+                            <td width="12%">
+                                <?php if ($data->status_pendaftaran == 'BELUM SELEKSI') : ?>
+                                    <a href="<?= site_url('pendaftaran/accept/' . $data->id_pendaftaran) ?>" class="btn btn-success btn-s"><i class="fa fa-check"></i> Terima</a>
+                                    <a href="<?= site_url('pendaftaran/reject/' . $data->id_pendaftaran) ?>" class="btn btn-danger btn-s"><i class="fa fa-close"></i> Tolak</a>
+                                <?php elseif ($data->status_pendaftaran == 'LULUS') : ?>
+                                    <a><label class="label bg-green">LULUS</label></a>
+                                <?php elseif ($data->status_pendaftaran == 'TIDAK LULUS') : ?>
+                                    <a><label class="label bg-red">TIDAK LULUS</label></a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -85,7 +91,7 @@
                                 <td><?= $data->tempat ?></td>
                                 <td><?= date_format( date_create($data->tanggal_pendaftaran), 'd - M - Y'); ?></td>
                                 <td> 
-                                    <?php switch ($data->status_pendaftaran) {
+                                    <?php switch ($data->status_pendaftaran) :
                                         case 'TIDAK LULUS': 
                                             echo '<label class="label bg-red">TIDAK LULUS</label>';
                                         break; 
@@ -95,7 +101,7 @@
                                         default: 
                                             echo '<label class="label bg-yellow">BELUM SELEKSI</label>';
                                         break; 
-                                     } ?>
+                                        endswitch; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
