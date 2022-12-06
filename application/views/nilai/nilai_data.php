@@ -1,61 +1,75 @@
-<?php if ($this->session->userdata('user_type') == 'pembina') { ?>
+<?php if ($this->session->userdata('user_type') == 'pembina') : ?>
     <section class="content-header">
         <h1>
-            Nilai
+            PENILAIAN
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-file"></i> Nilai</a></li>
-            <li class="active">Data Nilai</li>
+            <li><a href="#"><i class="fa fa-file"></i> Penilaian</a></li>
+            <li class="active">Data Penilaian Siswa</li>
         </ol>
     </section>
 
     <section class="content">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Data Nilai</h3>
-                <div class="pull-right">
+                <h3 class="box-title">Data Penilaian Siswa</h3>
+                <!-- <div class="pull-right">
                     <a href="<?= site_url('nilai/add') ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Tambah Nilai</a>
-                </div>
+                </div> -->
             </div>
             <div class="box-body table-responsive">
-                <table class="table table-bordered table-striped" id="datatable">
+                <table class="table table-bordered table-striped text-center" id="datatable">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>No.</th>
                             <th>Nama Siswa</th>
                             <th>Kelas</th>
                             <th>Semester</th>
-                            <th>Ekskul</th>
-                            <th>Jumlah Absen</th>
-                            <th>Nilai Absen</th>
-                            <th>Nilai Tes</th>
+                            <th>Jenis Ekstrakurikuler</th>
+                            <th>Total Kehadiran</th>
+                            <th>Nilai Presensi</th>
+                            <th>Total Nilai Ujian</th>
+                            <th>Nilai Ujian Akhir</th>
                             <th>Total</th>
                             <th>Predikat</th>
-                            <th>Action</th>
+                            <th>Data</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $no = 1;
-                        foreach ($row->result() as $nilai => $data) { ?>
+                        foreach ($set_nilai->result() as $nilai => $data) { ?>
                             <tr>
                                 <td><?= $no++ ?>.</td>
                                 <td><?= $data->nama_siswa ?></td>
                                 <td><?= $data->kelas ?></td>
                                 <td><?= $data->semester ?></td>
                                 <td><?= $data->nama_ekskul ?></td>
-                                <td><?= $data->jumlah_absen ?></td>
-                                <td><?= $data->nilai_absen ?></td>
-                                <td><?= $data->nilai_tes ?></td>
+                                <td><?= $data->total_presensi ?></td>
+                                <td><?= $data->nilai_presensi ?></td>
+                                <td><?= $data->total_nilai_ujian ?></td>
+                                <td><?= $data->nilai_ujian ?></td>
                                 <td><?= $data->total ?></td>
-                                <td><?= $data->predikat ?></td>
-                                <td class="text-center" width="160px">
-                                    <form action="<?= site_url('nilai/delete') ?>" method="post">
-                                        <a href="<?= site_url('nilai/edit/' . $data->id_nilai) ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Ubah Status</a>
-
-                                        <input type="hidden" name="id_nilai" value="<?= $data->id_nilai ?>">
-                                        <button onclick="return confirm('apakah anda ingin menghapus data ini ?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>
-                                        </button>
-                                    </form>
+                                <td>
+                                    <?php switch ($data->predikat) : 
+                                    case 'E':
+                                        echo '<p class="label label-danger">E</p>';
+                                    break;
+                                    case 'D':
+                                        echo '<p class="badge bg-red">E</p>';
+                                    break;
+                                    case 'C':
+                                        echo '<p class="badge bg-red">E</p>';
+                                    break;
+                                    case 'B':
+                                        echo '<p class="badge bg-red">E</p>';
+                                    break;
+                                    case 'A':
+                                        echo '<p class="badge bg-red"></p>';
+                                    break;
+                                    endswitch; ?>
+                                </td>
+                                <td class="text-center" width="7%">
+                                    <a href="<?= site_url('nilai/beri_nilai/' . $data->id_pendaftaran) ?>" class="btn btn-success"><i class="fa fa-edit"></i> Beri Nilai</a>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -64,55 +78,73 @@
             </div>
         </div>
     </section>
-<?php } ?>
-
-<?php if ($this->session->userdata('user_type') == 'siswa') { ?>
+<?php endif; ?>
+<?php if ($this->session->userdata('user_type') == 'siswa') : ?>
     <section class="content-header">
-        <h1>
-            Nilai
-        </h1>
+        <h1>PENILAIAN</h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-file"></i> Nilai</a></li>
-            <li class="active">Data Nilai</li>
+            <li><a href="#"><i class="fa fa-file"></i> Penilaian</a></li>
+            <li class="active">Data Penilaian</li>
         </ol>
     </section>
 
     <section class="content">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Data Nilai</h3>
+                <h3 class="box-title">Data Penilaian</h3>
             </div>
             <div class="box-body table-responsive">
-                <table class="table table-bordered table-striped" id="datatable">
+                <table class="table table-bordered table-striped text-center" id="datatable">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Ekskul</th>
+                            <th>No.</th>
+                            <th>Jenis Ekstrakurikuler</th>
                             <th>Semester</th>
-                            <th>Jumlah Absen</th>
-                            <th>Nilai Absen</th>
-                            <th>Nilai Tes</th>
-                            <th>Total</th>
+                            <th>Total Kehadiran</th>
+                            <th>Nilai Presensi</th>
+                            <th>Total Nilai Ujian</th>
+                            <th>Nilai Ujian Akhir</th>
+                            <th>Total Nilai</th>
                             <th>Predikat</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 1;
-                        foreach ($get_nilai->result() as $nilai => $data) { ?>
+                        <?php $no = 1; foreach ($get_nilai as $nilai => $data) : 
+                            
+                        ?>
                             <tr>
                                 <td><?= $no++ ?>.</td>
                                 <td><?= $data->nama_ekskul ?></td>
                                 <td><?= $data->semester ?></td>
-                                <td><?= $data->jumlah_absen ?></td>
-                                <td><?= $data->nilai_absen ?></td>
-                                <td><?= $data->nilai_tes ?></td>
+                                <td><?= $data->total_presensi ?></td>
+                                <td><?= $data->nilai_presensi ?></td>
+                                <td><?= $data->total_nilai_ujian ?></td>
+                                <td><?= $data->nilai_ujian ?></td>
                                 <td><?= $data->total ?></td>
-                                <td><?= $data->predikat ?></td>
+                                <td>
+                                    <?php switch ($data->predikat) : 
+                                    case 'E':
+                                        echo '<p class="label label-danger">E</p>';
+                                    break;
+                                    case 'D':
+                                        echo '<p class="badge bg-red">E</p>';
+                                    break;
+                                    case 'C':
+                                        echo '<p class="badge bg-red">E</p>';
+                                    break;
+                                    case 'B':
+                                        echo '<p class="badge bg-red">E</p>';
+                                    break;
+                                    case 'A':
+                                        echo '<p class="badge bg-red"></p>';
+                                    break;
+                                    endswitch; ?>
+                                </td>
                             </tr>
-                        <?php } ?>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
-<?php } ?>
+<?php endif; ?>

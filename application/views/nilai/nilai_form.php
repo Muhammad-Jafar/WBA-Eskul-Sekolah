@@ -1,23 +1,21 @@
 <section class="content-header">
-    <h1>
-        Tambah Nilai
-    </h1>
+    <h1>PENILAIAN</h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-file"></i> Nilai</a></li>
-        <li class="active">Tambah Data Nilai</li>
+        <li><a href="#"><i class="fa fa-file"></i> Penilaian</a></li>
+        <li class="active">Data Penilaian</li>
     </ol>
 </section>
 
 <section class="content">
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Tambah Data Nilai</h3>
+            <h3 class="box-title">Berikan Penilaian</h3>
             <div class="pull-right">
                 <a href="<?= site_url('nilai') ?>" class="btn btn-warning btn-flat"><i class="fa fa-undo"></i> Back</a>
             </div>
             <br>
         </div>
-        <form action="<?= site_url('nilai/process') ?>" method="post">
+        <form action="<?= site_url('nilai/beri_nilai') ?>" method="post">
             <div class="box-body table-responsive">
                 <table class="table table-bordered table-striped" id="datatable">
                     <thead>

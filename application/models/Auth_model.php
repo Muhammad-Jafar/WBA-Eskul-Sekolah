@@ -51,11 +51,12 @@ class Auth_model extends CI_Model {
 		else if ($cek_login_siswa->num_rows()) {
 			$d = $cek_login_siswa->row();
 			$this->session->set_userdata('user_id', $d->id_siswa);
-			$cek_eskul = $this->db->query("SELECT p.id_siswa, p.id_ekskul FROM pendaftaran AS p JOIN siswa AS s WHERE p.id_siswa = $d->id_siswa LIMIT 3");
+			$cek_eskul = $this->db->query("SELECT p.id_siswa, p.id_ekskul, je.nama_ekskul FROM pendaftaran AS p JOIN siswa AS s JOIN jenis_eskul as je WHERE p.id_siswa = $d->id_siswa AND p.id_ekskul = je.id_ekskul LIMIT 3");
 			if ($cek_eskul-> num_rows()) {
 				$q = $cek_eskul->row();
 				$this->session->set_userdata('cek_eskul', $q->id_siswa);
 				$this->session->set_userdata('get_id_eskul', $q->id_ekskul);
+				$this->session->set_userdata('get_nama_eskul', $q->nama_ekskul);
 			}
 			$this->session->set_userdata('is_logged_in', 'login');
 			$this->session->set_userdata('user_type', 'siswa');

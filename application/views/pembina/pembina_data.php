@@ -30,8 +30,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $no = 1;
-                    foreach ($row->result() as $pembina => $data) { ?>
+                    <?php $no = 1; foreach ($row->result() as $pembina => $data) : ?>
                         <tr>
                             <td><?= $no++ ?>.</td>
                             <td><?= $data->nama_pembina ?></td>
@@ -51,7 +50,7 @@
                                 </form>
                             </td>
                         </tr>
-                    <?php } ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

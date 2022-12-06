@@ -1,62 +1,40 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Nilai_model extends CI_Model
-{
-    public function get($id = null)
-    {
+class Nilai_model extends CI_Model {
+    public function set_nilai($id = null) {
         $id_ekskul = $this->session->userdata('pembina_ekskul');
-        $this->db->select('nilai.*, siswa.nama_siswa, siswa.kelas, ekstrakurikuler.nama_ekskul ');
-        $this->db->from('nilai');
-        $this->db->join('pendaftaran', 'pendaftaran.id_pendaftaran = nilai.id_pendaftaran');
-        $this->db->join('siswa', 'siswa.id_siswa = pendaftaran.id_siswa');
-        $this->db->join('ekstrakurikuler', 'ekstrakurikuler.id_ekskul = pendaftaran.id_ekskul');
-        $this->db->where('pendaftaran.id_ekskul', $id_ekskul);
-        $this->db->order_by('ekstrakurikuler.id_ekskul');
-
-        if ($id != null) {
-            $this->db->where('id_nilai', $id);
-        }
-        $query = $this->db->get();
-        return $query;
+        $q = $this->db->select('n.*, s.nama_siswa, s.kelas, je.nama_ekskul')
+                    ->from('nilai as n')
+                    ->join('pendaftaran as p', 'p.id_pendaftaran = n.id_pendaftaran', 'LEFT')
+                    ->join('siswa as s', 's.id_siswa = p.id_siswa', 'LEFT')
+                    ->join('jenis_eskul as je', 'je.id_ekskul = p.id_ekskul', 'LEFT')
+                    ->where('p.id_ekskul', $id_ekskul)->get();
+                    // ->order_by('je.id_ekskul');
+        if ($id != null) { $this->db->where('n.id_pendaftaran', $id); }
+        return $q;
     }
 
-    public function get_nilai() //agar bisa di akses masing-masing sesuai siswa
-    {
+    public function get_nilai() {
         $id_siswa = $this->session->userdata('user_id');
-        $this->db->select('nilai.*, ekstrakurikuler.nama_ekskul');
-        $this->db->from('nilai');
-        $this->db->join('pendaftaran', 'pendaftaran.id_pendaftaran = nilai.id_pendaftaran');
-        $this->db->join('ekstrakurikuler', 'ekstrakurikuler.id_ekskul = pendaftaran.id_ekskul');
-        $this->db->join('siswa', 'siswa.id_siswa = pendaftaran.id_siswa');
-        $this->db->where('pendaftaran.id_siswa', $id_siswa);
-        $this->db->order_by('siswa.id_siswa');
-
-        $query = $this->db->get();
-        return $query;
+        $q = $this->db->select('n.*, je.nama_ekskul')
+                    ->from('nilai as n')
+                    ->join('pendaftaran as p', 'p.id_pendaftaran = n.id_pendaftaran', 'LEFT')
+                    ->join('jenis_eskul as je', 'je.id_ekskul = p.id_ekskul', 'LEFT')
+                    ->join('siswa as s', 's.id_siswa = p.id_siswa', 'LEFT')
+                    ->where('p.id_siswa', $id_siswa)->get()->result();
+        return $q;
     }
 
-    public function add($post)
-    {
-        $params = [
-            'id_pendaftaran' => $post['pendaftaran'],
-
+    public function set_nilai_siswa($id) {
+        $set = [
+            // 'id_pendaftaran' => 'id_pendaftaran',
+            'total_nilai_ujian' => 'total_nilai_ujian',
+            'nilai_presensi' => 'nilai_presensi',
+            'nilai_ujian' => 'nilai_ujian',
+            'total' => 'total',
+            'predikat' => 'predikat',
         ];
-        $this->db->insert('nilai', $params);
-    }
-    public function edit($post)
-    {
-        $params = [
-            'id_pendaftaran' => $post['pendaftaran'],
-
-        ];
-        $this->db->where('id_nilai', $post['id_nilai']);
-        $this->db->update('nilai', $params);
-    }
-
-    public function delete($id)
-    {
-        $this->db->where('id_nilai', $id);
-        $this->db->delete('nilai');
+        $this->db->where('id_pendaftaran', $id)->update('nilai', $set);
     }
 }

@@ -6,11 +6,9 @@
             <div class="box box-primary">
                <div class="box-body box-profile">
                   <img class="profile-user-img img-responsive img-circle" src="assets/dist/img/user2-160x160.jpg" alt="User profile picture">
-                  <h3 class="profile-username text-center"><?= $this->session->userdata('user_type') ?></h3>
+                  <h3 class="profile-username text-center"><?= $this->session->userdata('user_name') ?></h3>
+                  <p class="text-muted text-center"><?= $this->session->userdata('user_type') ?></p>
                   <ul class="list-group list-group-unbordered">
-                     <li class="list-group-item">
-                        <b>Nama</b> <a class="pull-right"><?= $this->session->userdata('user_name') ?></a>
-                     </li>
                      <li class="list-group-item">
                         <b>Username</b> <a class="pull-right"><?= $this->session->userdata('user_username') ?></a>
                      </li>
@@ -58,11 +56,9 @@
             <div class="box box-primary">
                <div class="box-body box-profile">
                   <img class="profile-user-img img-responsive img-circle" src="assets/dist/img/user2-160x160.jpg" alt="User profile picture">
-                  <h3 class="profile-username text-center"> <?= $this->session->userdata('user_type') ?> </h3>
+                  <h3 class="profile-username text-center"> <?= $this->session->userdata('user_name') ?> </h3>
+                  <p class="text-muted text-center"><?= $this->session->userdata('user_type') ?></p>
                   <ul class="list-group list-group-unbordered">
-                     <li class="list-group-item">
-                        <b>Nama</b> <a class="pull-right"><?= $this->session->userdata('user_name') ?></a>
-                     </li>
                      <li class="list-group-item">
                         <b>NIP</b> <a class="pull-right"><?= $this->session->userdata('pembina_nip') ?></a>
                      </li>
@@ -123,11 +119,9 @@
             <div class="box box-primary">
                <div class="box-body box-profile">
                   <img class="profile-user-img img-responsive img-circle" src="assets/dist/img/user2-160x160.jpg" alt="User profile picture">
-                  <h3 class="profile-username text-center"><?= $this->session->userdata('user_type') ?></h3>
+                  <h3 class="profile-username text-center"><?= $this->session->userdata('user_name') ?></h3>
+                  <p class="text-muted text-center"><?= $this->session->userdata('user_type') ?></p>
                   <ul class="list-group list-group-unbordered">
-                     <li class="list-group-item">
-                        <b>Nama</b> <a class="pull-right"><?= $this->session->userdata('user_name') ?></a>
-                     </li>
                      <li class="list-group-item">
                         <b>NISN</b> <a class="pull-right"><?= $this->session->userdata('siswa_nis') ?></a>
                      </li>

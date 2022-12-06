@@ -62,7 +62,7 @@
                 <h3 class="box-title">Catatan: maksimal mengikuti 3 ekstrakurikuler</h3>
                 <div class="pull-right">
                     <?php if($cek == 3) : ?>
-                        <a onclick="return confirm('Maksimal mengikuti kegiatan eskul terpenuhi!')" class="btn btn-primary"><i class="fa fa-plus"></i> Daftar Kegiatan</a>
+                        <a onclick="return confirm('Maksimal mengikuti kegiatan eskul terpenuhi!')" class="btn btn-warning"><i class="fa fa-plus"></i> Daftar Kegiatan</a>
                     <?php else : ?>
                         <a href="<?= site_url('pendaftaran/add') ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Daftar Kegiatan</a>
                     <?php endif; ?>
@@ -81,8 +81,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 1;
-                        foreach ( $pendaftaran->result() as $daftar => $data) : ?>
+                        <?php $no = 1; foreach ( $pendaftaran->result() as $daftar => $data) : ?>
                             <input type="hidden" name="id_pendaftaran" value="<?= $data->id_pendaftaran ?>">
                             <tr>
                                 <td><?= $no++ ?>.</td>

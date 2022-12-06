@@ -16,8 +16,12 @@
     <body class="hold-transition login-page">
         <div class="login-box">
             <div class="login-box-body">
-                <div class="login-logo"><b>APPENDEKS</b></div>
-                <p class="login-box-msg">Masuk Untuk Memulai</p>
+                <div class="login-logo">
+                    <h4><b>Aplikasi Pendaftaran Ekstrakurikuler</b></h4>
+                    <h4>SMAN 1 Moyo Utara</h4>  
+                </div>
+                <h4 class="login-box-msg"><b>SELAMAT DATANG,</b></h4>
+                <p class="login-box-msg">Silahkan masuk Untuk Memulai</p>
                 <?= form_open('auth/process', array('method' => 'post')); ?>
                 <!-- <form action="<?= site_url('auth/process') ?>" method="post"> -->
                 <?php if ($this->session->flashdata('msg_alert')) : ?>
@@ -25,7 +29,6 @@
                         <label style="font-size: 17px;"><?= $this->session->flashdata('msg_alert'); ?></label>
                     </div>
                 <?php endif; ?>
-
                 <div class="form-group">
                     <label class="label" style="font-size:16px; color:grey; margin-left: -10px;">Username</label>
                     <div class="form-group has-feedback">
@@ -33,7 +36,6 @@
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="label" style="font-size:16px; color:grey; margin-left: -10px;">Password</label>
                     <div class="form-group has-feedback">
@@ -41,18 +43,19 @@
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-8">
-                        <div class="checkbox icheck">
-                            <label>
-                                <input type="checkbox"> Remember me ?
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-xs-4">
-                        <button class="btn btn-primary submit-btn btn-block">Login</button>
-                    </div>
+                <div class="box-footer">
+                    <button class="btn btn-primary submit-btn btn-block">Login</button>
                 </div>
+                <!-- <div class="row"> -->
+                    <!-- <div class="col-xs-8">
+                        <div class="checkbox icheck">
+                            <label><input type="checkbox"> Remember me ?</label>
+                        </div>
+                    </div> -->
+                    <!-- <div class="col-xs-4"> -->
+                        <!-- <button class="btn btn-primary submit-btn btn-block">Login</button> -->
+                    <!-- </div> -->
+                <!-- </div> -->
                 <?= form_close(); ?>
             </div>
         </div>

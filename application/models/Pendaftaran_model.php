@@ -27,7 +27,7 @@ class Pendaftaran_model extends CI_Model {
 
     public function check_limit_eskul() {
         $id_siswa = $this->session->userdata('user_id');
-        $q = $this->db->query("SELECT ( SELECT COUNT(id_siswa) FROM pendaftaran WHERE id_siswa = '$id_siswa') AS CEK");
+        $q = $this->db->query("SELECT ( SELECT COUNT(id_siswa) FROM pendaftaran WHERE id_siswa = '$id_siswa') AS CEK ");
         return $q->row_array()['CEK'];
     }
 
@@ -38,7 +38,7 @@ class Pendaftaran_model extends CI_Model {
                       ->where('p.id_siswa', $id_siswa)->get()->result();
         return $q;
     }
-
+    
     /* PEMBINA PROSES */
     public function accept($id) {
         $params = ['status_pendaftaran' => 'LULUS'];
@@ -54,7 +54,7 @@ class Pendaftaran_model extends CI_Model {
         $this->db->where('id_pendaftaran', $id)->delete('pendaftaran');
     }
 
-    /* SISWA PROSES */
+    /* ADMIN PROSES */
     public function add($post) {
         $pendaftaran = [
             'id_ekskul' => $post['id_ekskul'],

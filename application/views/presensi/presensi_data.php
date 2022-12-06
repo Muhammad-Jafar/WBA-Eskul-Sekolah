@@ -14,6 +14,7 @@
                 <div class="pull-right">
                     <a href="<?= site_url('presensi/add') ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Tambah Presensi</a>
                 </div>
+                <p> HASILNA  <?php echo $check_presensi ?></p>
             </div>
             <div class="box-body table-responsive">
                 <table class="table table-bordered table-striped text-center" id="datatable">
@@ -27,21 +28,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 1; foreach ($set_presensi->result() as $presensi => $data) : ?>
+                        <?php foreach ($set_presensi->result() as $presensi => $data) : 
+                            $tgl_presensi = new DateTime($data->tgl_presensi);
+                            $tgl_sekarang = new DateTime(); 
+                        ?>
                             <tr>
-                                <?php if ($check_presensi = 1) : ?>
+                                <?php if ($check_presensi > 1) : ?>
+                                    <td> Pertemuan ke - <?= $check_presensi++?> </td>
+                                <?php else : ?>
                                     <td> Pertemuan ke - 1 </td>
-                                <?php elseif ($check_presensi > 1) : ?>
-                                    <td> Pertemuan ke - <?= $check_presensi++; ?></td>
                                 <?php endif; ?>
-                                <!-- <td><?= $no++ ?></td> -->
                                 <td><?= $data->nama_siswa ?></td>
                                 <td><?= $data->kelas ?></td>
                                 <td><?= $data->nama_ekskul ?></td>
                                 <td class="text-center" width="12%">
-                                    <a href="<?= site_url('pendaftaran/accept/' . $data->id_pendaftaran) ?>" class="btn btn-success btn-s"><i class="fa fa-check"> Hadir</i></a>
-                                    <a href="<?= site_url('pendaftaran/reject/' . $data->id_pendaftaran) ?>" class="btn btn-danger btn-s"><i class="fa fa-close"> Tidak</i></a>
-                                </td>
+                                    <?php if ( $tgl_sekarang < $tgl_presensi ) : ?>
+                                        <a onclick="return confirm('Presensi sudah dilakukan hari ini !')" class="btn btn-default btn-s"><i class="fa fa-check"> Hadir</i></a>
+                                        <a onclick="return confirm('Presensi sudah dilakukan hari ini!')" class="btn btn-default btn-s"><i class="fa fa-close"> Tidak</i></a>
+                                    <?php else : ?>
+                                        <a href="<?= site_url('presensi/present/' . $data->id_presensi) ?>" class="btn btn-success btn-s"><i class="fa fa-check"> Hadir</i></a>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-danger btn-s dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-close"> Tidak</i> <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="<?= site_url('presensi/absen_izin/' . $data->id_presensi) ?>">Izin</a></li>
+                                                <li><a href="<?= site_url('presensi/absen_sakit/' . $data->id_presensi) ?>">Sakit</a></li>
+                                                <li><a href="<?= site_url('presensi/absen_lainlain/' . $data->id_presensi) ?>">Lain-lain</a></li>
+                                            </ul>
+                                        </div>
+                                    <?php endif; ?>
+                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -50,7 +67,6 @@
         </div>
     </section>
 <?php endif; ?>
-
 <?php if ($this->session->userdata('user_type') == 'siswa') : ?>
     <section class="content-header">
         <h1>PRESENSI KEHADIRAN</h1>
@@ -64,50 +80,48 @@
         <div class="box">
             <div class="box-header"><h3 class="box-title">Daftar Presensi</h3></div>
             <div class="box-body">
-                <ul class="nav nav-tabs">
-                    <?php foreach ($get_eskul as $eskul => $data) : ?>
-                        <li class="<?php ($data->nama_ekskul == "Pramuka") ? "active" : ""; ?>"><a href="#" data-toggle="tab"><?= $data->nama_ekskul ?></a></li>
-                    <?php endforeach; ?>
-                    <!-- <li class=""><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li> -->
-                    <!-- <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li> -->
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="nama_eskul">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="datatable">
-                                <thead>
-                                    <tr>
-                                        <th>Nomor Presensi</th>
-                                        <th>Jenis Ekstrakurikuler</th>
-                                        <th>Tanggal Presensi</th>
-                                        <th>Status Presensi</th>
-                                        <th>Keterangan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $no = 1; foreach ($get_presensi as $absen => $data) : ?>
-                                        <tr>
-                                            <td> Presensi ke - <?= $no++?></td>
-                                                <td><?= $data->nama_ekskul ?></td>
-                                                <td><?= $data->tgl_presensi ?></td>
-                                                <?php if ($data->status_presensi == 'Hadir' ) : ?>
-                                                    <td> <label><badge class="badge bg-green"><i class="fa fa-check bg-green"></i></badge> 
-                                                    <?= $data->status_presensi ?></label> </td>
-                                                <?php else : ?>
-                                                    <td> <label><badge class="badge bg-red"><i class="fa fa-close bg-red"></i></badge> 
-                                                    <?= $data->status_presensi ?></label> </td>
-                                                <?php endif; ?>
-                                                <?php if ($data->ket_presensi == null) : ?>
-                                                    <td> Tidak ada keterangan </td>  
-                                                <?php else : ?>
-                                                    <td><?= $data->ket_presensi ?></td>
-                                                <?php endif; ?>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped" id="datatable">
+                        <thead>
+                            <tr>
+                                <th>Nomor Presensi</th>
+                                <th>Jenis Ekstrakurikuler</th>
+                                <th>Tanggal Presensi</th>
+                                <th>Status Presensi</th>
+                                <th>Keterangan </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $no = 1; foreach ($get_presensi as $absen => $data) : ?>
+                                <tr>
+                                    <td> Presensi ke - <?= $no++?></td>
+                                    <td><?= $data->nama_ekskul ?></td>
+                                    <td><?= $data->tgl_presensi ?></td>
+                                    <?php if ($data->status_presensi == 'Hadir' ) : ?>
+                                        <td> 
+                                            <label><badge class="badge bg-green"><i class="fa fa-check bg-green"></i></badge> 
+                                            <?= $data->status_presensi ?></label> 
+                                        </td>
+                                    <?php elseif ($data->status_presensi == 'Tidak Hadir') : ?>
+                                        <td> 
+                                            <label><badge class="badge bg-red"><i class="fa fa-close bg-red"></i></badge> 
+                                            <?= $data->status_presensi ?></label> 
+                                        </td>
+                                    <?php else : ?>
+                                        <td>
+                                            <label><badge class="badge bg-yellow"><i class="fa fa-minus bg-yellow"></i></badge> 
+                                            <?= $data->status_presensi ?></label> 
+                                        </td>
+                                    <?php endif; ?>
+                                    <?php if ($data->ket_presensi == null) : ?>
+                                        <td> Tidak ada keterangan </td>  
+                                    <?php else : ?>
+                                        <td><?= $data->ket_presensi ?></td>
+                                    <?php endif; ?>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
