@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2022 at 03:21 PM
+-- Generation Time: Dec 07, 2022 at 04:26 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -54,7 +54,7 @@ CREATE TABLE `berita` (
   `judul` varchar(100) NOT NULL,
   `gambar` text DEFAULT NULL,
   `keterangan` text NOT NULL,
-  `tanggal_pos` datetime NOT NULL DEFAULT current_timestamp()
+  `tanggal_pos` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -62,9 +62,9 @@ CREATE TABLE `berita` (
 --
 
 INSERT INTO `berita` (`id_berita`, `id_admin`, `judul`, `gambar`, `keterangan`, `tanggal_pos`) VALUES
-(1, 1, 'Rupa-rupa Cerita Perpisahan Anies dari Gubernur Jakarta', 'adasdasd.jpg', '<p>Ini juga ga jelas apa isinya.</p>\r\n', '2022-10-16 23:46:43'),
-(2, 1, 'Anies Maju jadi Capres 2024 diusung nasdem', 'adad.png', '<p>sadsadasdasdsadasdasdsadsaddadadsdad</p>\r\n', '2022-10-17 00:06:54'),
-(3, 1, 'Tambahan tanpa perubahan', 'stok.png', '<p>Tanpa tau apa yang akan terjadi</p>\r\n', '2022-11-26 00:24:14');
+(1, 1, 'Rupa-rupa Cerita Perpisahan Anies dari Gubernur Jakarta', 'adasdasd.jpg', '<p>Ini juga ga jelas apa isinya.</p>\r\n', '2022-10-16'),
+(2, 1, 'Anies Maju jadi Capres 2024 diusung nasdem', 'adad.png', '<p>sadsadasdasdsadasdasdsadsaddadadsdad</p>\r\n', '2022-10-17'),
+(3, 1, 'Tambahan tanpa perubahan', 'stok.png', '<p>Tanpa tau apa yang akan terjadi</p>\r\n', '2022-11-26');
 
 -- --------------------------------------------------------
 
@@ -132,12 +132,19 @@ CREATE TABLE `nilai` (
 --
 
 INSERT INTO `nilai` (`id_nilai`, `id_pendaftaran`, `semester`, `total_presensi`, `total_nilai_ujian`, `nilai_presensi`, `nilai_ujian`, `total`, `predikat`) VALUES
-(1, 1, '1', 4, 0, 0, 0, 0, 'E'),
-(2, 2, '1', 2, 0, 0, 0, 0, 'E'),
-(3, 3, '1', 1, 0, 0, 0, 0, 'E'),
-(4, 13, '1', 2, 0, 0, 0, 0, 'E'),
-(7, 16, '1', 3, 0, 0, 0, 0, 'E'),
-(8, 16, '1', 2, 0, 0, 0, 0, 'E');
+(1, 1, '1', 0, 0, 0, 0, 0, 'E'),
+(2, 2, '1', 0, 0, 0, 0, 0, 'E');
+
+--
+-- Triggers `nilai`
+--
+DELIMITER $$
+CREATE TRIGGER `tambah_data_presensi` AFTER UPDATE ON `nilai` FOR EACH ROW BEGIN
+	INSERT INTO presensi(id_pendaftaran, tgl_presensi)
+    VALUES(New.id_pendaftaran, DATE_ADD(NOW(), INTERVAL 7 DAY));
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -178,7 +185,7 @@ CREATE TABLE `pendaftaran` (
   `id_siswa` int(3) NOT NULL,
   `id_ekskul` int(3) NOT NULL,
   `status_pendaftaran` enum('BELUM SELEKSI','LULUS','TIDAK LULUS') NOT NULL DEFAULT 'BELUM SELEKSI',
-  `tanggal_pendaftaran` datetime NOT NULL DEFAULT current_timestamp()
+  `tanggal_pendaftaran` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -186,22 +193,17 @@ CREATE TABLE `pendaftaran` (
 --
 
 INSERT INTO `pendaftaran` (`id_pendaftaran`, `id_siswa`, `id_ekskul`, `status_pendaftaran`, `tanggal_pendaftaran`) VALUES
-(1, 1, 1, 'LULUS', '2022-09-23 21:10:12'),
-(2, 1, 2, 'LULUS', '2022-11-25 22:33:42'),
-(3, 1, 3, 'LULUS', '2022-11-25 23:04:41'),
-(8, 3, 4, 'LULUS', '2022-11-28 20:47:50'),
-(11, 5, 3, 'TIDAK LULUS', '2022-11-28 22:30:41'),
-(13, 3, 3, 'LULUS', '2022-11-30 21:45:09'),
-(14, 13, 2, 'LULUS', '2022-12-06 13:31:18'),
-(15, 3, 2, 'LULUS', '2022-12-06 13:50:54'),
-(16, 13, 4, 'LULUS', '2022-12-07 22:10:11');
+(1, 1, 1, 'LULUS', '2022-12-07'),
+(2, 2, 1, 'LULUS', '2022-12-07');
 
 --
 -- Triggers `pendaftaran`
 --
 DELIMITER $$
 CREATE TRIGGER `tambah_presensi` AFTER INSERT ON `pendaftaran` FOR EACH ROW BEGIN
-	INSERT INTO presensi(id_pendaftaran, tgl_presensi) VALUES(new.id_pendaftaran, now());
+	INSERT INTO presensi(id_pendaftaran, tgl_presensi)
+    VALUES(NEW.id_pendaftaran, NOW());
+    INSERT INTO nilai(id_pendaftaran) VALUES(NEW.id_pendaftaran);
 END
 $$
 DELIMITER ;
@@ -215,7 +217,7 @@ DELIMITER ;
 CREATE TABLE `presensi` (
   `id_presensi` int(4) NOT NULL,
   `id_pendaftaran` int(3) NOT NULL,
-  `tgl_presensi` date NOT NULL DEFAULT current_timestamp(),
+  `tgl_presensi` datetime NOT NULL DEFAULT current_timestamp(),
   `presensi_point` int(2) NOT NULL DEFAULT 0,
   `status_presensi` enum('Belum Hadir','Hadir','Tidak Hadir') NOT NULL DEFAULT 'Belum Hadir',
   `ket_presensi` enum('Izin','Sakit','Lain-lain') DEFAULT NULL
@@ -226,37 +228,12 @@ CREATE TABLE `presensi` (
 --
 
 INSERT INTO `presensi` (`id_presensi`, `id_pendaftaran`, `tgl_presensi`, `presensi_point`, `status_presensi`, `ket_presensi`) VALUES
-(1, 1, '2022-11-29', 1, 'Hadir', NULL),
-(2, 2, '2022-11-29', 1, 'Hadir', NULL),
-(3, 3, '2022-11-29', 1, 'Hadir', NULL),
-(4, 1, '2022-11-29', 1, 'Tidak Hadir', 'Sakit'),
-(5, 1, '2022-11-29', 1, 'Hadir', NULL),
-(7, 13, '2022-11-30', 1, 'Hadir', NULL),
-(8, 1, '2022-12-03', 0, 'Belum Hadir', ''),
-(9, 8, '2022-12-05', 1, 'Hadir', NULL),
-(10, 8, '2022-12-05', 0, 'Tidak Hadir', 'Sakit'),
-(11, 8, '2022-12-05', 0, 'Belum Hadir', NULL),
-(12, 14, '2022-12-06', 1, 'Hadir', NULL),
-(13, 13, '2022-12-06', 1, 'Hadir', NULL),
-(14, 2, '2022-12-06', 1, 'Hadir', NULL),
-(15, 15, '2022-12-06', 1, 'Hadir', NULL),
-(16, 14, '2022-12-13', 0, 'Belum Hadir', NULL),
-(17, 2, '2022-12-13', 0, 'Belum Hadir', NULL),
-(18, 15, '2022-12-13', 0, 'Belum Hadir', NULL),
-(26, 3, '2022-12-07', 0, 'Belum Hadir', NULL),
-(28, 16, '2022-12-07', 1, 'Hadir', NULL),
-(29, 16, '2022-12-14', 0, 'Belum Hadir', NULL);
+(1, 1, '2022-12-07 23:22:23', 0, 'Belum Hadir', NULL),
+(2, 2, '2022-12-07 23:22:33', 0, 'Belum Hadir', NULL);
 
 --
 -- Triggers `presensi`
 --
-DELIMITER $$
-CREATE TRIGGER `tambah_data_nilai` AFTER INSERT ON `presensi` FOR EACH ROW BEGIN
-	INSERT INTO nilai(id_pendaftaran, total_presensi)
-    VALUES(NEW.id_pendaftaran, 1);
-END
-$$
-DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `update_data_nilai` AFTER UPDATE ON `presensi` FOR EACH ROW BEGIN
 	UPDATE nilai SET total_presensi = total_presensi + 1
@@ -290,13 +267,13 @@ CREATE TABLE `siswa` (
 
 INSERT INTO `siswa` (`id_level`, `id_siswa`, `nama_siswa`, `nis`, `jenis_kelamin`, `kelas`, `ttl`, `no_hp`, `username`, `password`) VALUES
 (3, 1, 'Aceu', '123133', 'Laki-laki', 'X', 'Waole, 7 September 1999', 3244424, 'aceu123', '83f1b0e8d0912345de3c61497e25750c'),
-(3, 3, 'IIzttimmy', '46553', 'Perempuan', 'XI', 'Sabo, 27 Agustus 1999', 2147483647, 'timy123', '58b66b1d7b8087b8e484ae1dc8044264'),
-(3, 5, 'Aman mineral', '24223412', 'Laki-laki', 'XI', 'Sabo, 27 Agustus 1999', 3634533, 'amanminera', 'bd00eb0f2a3ce174d021c6c7a6163eba'),
-(3, 6, 'Mineral aman', '3246452', 'Laki-laki', 'XII', 'Batauga, 7 Januari2004', 2342342, 'mineralama', '7671a6a3ffe5ded5911e86e2e5968d93'),
-(3, 8, 'ImperialHal', '3352342', 'Laki-laki', 'XI', 'Sabo, 27 Agustus 1995', 231321634, 'hal', 'c74037e3e81ab0461d81f07c43ed3967'),
-(3, 11, 'Hari Minggu', '23242424', 'Laki-laki', 'XI', 'Baruga, 7 Januari 2002', 432423242, 'minggu', '7336fab39ae864ca66c1f549431f13d9'),
-(3, 12, 'Abu Rizal Bakrie', '24223412', 'Laki-laki', 'XII', 'Waole, 7 Januari 1988', 1234567890, 'arb', '1a53aa0e9d91d9ae3ceb902097b36571'),
-(3, 13, 'Asasin', '1233455', 'Laki-laki', 'XII', 'Sabo, 27 Agustus 1994', 3131231, 'asasin', 'c4eabdc642206591769d2fa863e9cb39');
+(3, 2, 'IIzttimmy', '46553', 'Perempuan', 'XI', 'Sabo, 27 Agustus 1999', 2147483647, 'timy123', '58b66b1d7b8087b8e484ae1dc8044264'),
+(3, 3, 'Aman mineral', '24223412', 'Laki-laki', 'XI', 'Sabo, 27 Agustus 1999', 3634533, 'amanminera', 'bd00eb0f2a3ce174d021c6c7a6163eba'),
+(3, 4, 'Mineral aman', '3246452', 'Laki-laki', 'XII', 'Batauga, 7 Januari2004', 2342342, 'mineralama', '7671a6a3ffe5ded5911e86e2e5968d93'),
+(3, 5, 'ImperialHal', '3352342', 'Laki-laki', 'XI', 'Sabo, 27 Agustus 1995', 231321634, 'hal', 'c74037e3e81ab0461d81f07c43ed3967'),
+(3, 6, 'Hari Minggu', '23242424', 'Laki-laki', 'XI', 'Baruga, 7 Januari 2002', 432423242, 'minggu', '7336fab39ae864ca66c1f549431f13d9'),
+(3, 7, 'Abu Rizal Bakrie', '24223412', 'Laki-laki', 'XII', 'Waole, 7 Januari 1988', 1234567890, 'arb', '1a53aa0e9d91d9ae3ceb902097b36571'),
+(3, 8, 'Asasin', '1233455', 'Laki-laki', 'XII', 'Sabo, 27 Agustus 1994', 3131231, 'asasin', 'c4eabdc642206591769d2fa863e9cb39');
 
 --
 -- Indexes for dumped tables
@@ -388,7 +365,7 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT for table `nilai`
 --
 ALTER TABLE `nilai`
-  MODIFY `id_nilai` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_nilai` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pembina`
@@ -400,13 +377,13 @@ ALTER TABLE `pembina`
 -- AUTO_INCREMENT for table `pendaftaran`
 --
 ALTER TABLE `pendaftaran`
-  MODIFY `id_pendaftaran` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_pendaftaran` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `presensi`
 --
 ALTER TABLE `presensi`
-  MODIFY `id_presensi` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_presensi` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `siswa`
