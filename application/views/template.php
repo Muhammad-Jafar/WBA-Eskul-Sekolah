@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="sidebar-menu">
-                        <li class="active">
+                        <li>
                             <a href="<?= site_url('dashboard') ?>">
                                 <i class="fa fa-dashboard"></i>
                                 <span>Dashboard</span>

@@ -9,10 +9,15 @@ class Presensi extends CI_Controller {
 
     public function index() {
         $data['set_presensi'] = $this->presensi_model->pembina_set_presensi();
-        $data['check_presensi'] = $this->presensi_model->check_presensi_siswa();
+        // $data['kode_presensi'] = $this->presensi_model->kode_presensi();
         $data['get_presensi'] = $this->presensi_model->siswa_get_presensi();
         $data['get_eskul'] = $this->presensi_model->siswa_get_eskul();
         $this->template->load('template', 'presensi/presensi_data', $data);
+    }
+
+    public function set_presensi($id) {
+        $this->presensi_model->set_presensi_siswa($id);
+        redirect('presensi');
     }
 
     public function present($id) {

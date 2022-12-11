@@ -28,7 +28,7 @@
                             <td><?= $data->nama_siswa ?></td>
                             <td><?= $data->kelas ?></td>
                             <td><?= $data->nama_ekskul ?></td>
-                            <td><?= date_format( date_create($data->tanggal_pendaftaran), 'd - M - Y');  ?></td>
+                            <td><?= tgl_indo_medium($data->tanggal_pendaftaran)  ?></td>
                             <td width="12%">
                                 <?php if ($data->status_pendaftaran == 'BELUM SELEKSI') : ?>
                                     <a href="<?= site_url('pendaftaran/accept/' . $data->id_pendaftaran) ?>" class="btn btn-success btn-s"><i class="fa fa-check"></i> Terima</a>

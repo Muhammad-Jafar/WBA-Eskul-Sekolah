@@ -11,7 +11,7 @@
         <div class="box-header">
             <h3 class="box-title">Berikan Penilaian</h3>
             <div class="pull-right">
-                <a href="<?= site_url('nilai') ?>" class="btn btn-warning btn-flat"><i class="fa fa-undo"></i> Back</a>
+                <a href="<?= site_url('nilai') ?>" class="btn btn-warning btn-flat"><i class="fa fa-arrow-left"></i> Back</a>
             </div>
             <br>
         </div>

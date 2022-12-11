@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Presensi_model extends CI_Model {
     public function pembina_set_presensi($id = null) { 
         $id_ekskul = $this->session->userdata('pembina_ekskul');
-        $q = $this->db->select('pr.id_presensi, pr.id_pendaftaran, pr.presensi_point, pr.status_presensi, pr.tgl_presensi,
+        $q = $this->db->select('pr.id_presensi, pr.kode_presensi, pr.id_pendaftaran, pr.presensi_point, pr.status_presensi, pr.tgl_presensi,
                                 s.nama_siswa, s.kelas, je.nama_ekskul, p.status_pendaftaran')
                     ->from('presensi as pr')
                     ->join('pendaftaran as p', 'p.id_pendaftaran = pr.id_pendaftaran', 'LEFT')
@@ -13,25 +13,22 @@ class Presensi_model extends CI_Model {
                     ->join('jenis_eskul as je', 'je.id_ekskul = p.id_ekskul', 'LEFT')
                     ->where('p.status_pendaftaran', 'LULUS')
                     ->where('pr.status_presensi', 'Belum Hadir')
-                    ->where('je.id_ekskul', $id_ekskul)->get();
+                    ->where('je.id_ekskul', $id_ekskul)
+                    ->order_by('s.nama_siswa', 'ASC')->get();
         if ($id != null) { $this->db->where('id_siswa', $id); }
         return $q;
     }
 
-    public function check_presensi_siswa() {
-        $id_siswa = $this->session->userdata('user_id');
-        $id_eskul = $this->session->userdata('get_id_eskul');
-        $q = $this->db->query("SELECT (SELECT COUNT(pr.presensi_point) FROM presensi AS pr INNER JOIN pendaftaran AS p 
-                                INNER JOIN siswa AS s INNER JOIN jenis_eskul AS je ON pr.id_pendaftaran = p.id_pendaftaran
-                                WHERE p.id_ekskul = je.id_ekskul AND s.id_siswa = p.id_siswa
-                                AND p.id_siswa = '$id_siswa' AND je.id_ekskul = '$id_eskul' ) AS CEK_PRESENSI ");
-        return $q->row_array()['CEK_PRESENSI'];
-    }
+    // public function check_presensi_siswa() {
+    //     $q = $this->db->query("SELECT (SELECT COUNT(pr.presensi_point) FROM presensi AS pr LEFT JOIN pendaftaran AS p LEFT JOIN siswa AS s
+    //                             ON pr.id_pendaftaran = p.id_pendaftaran
+    //                             WHERE p.id_siswa = s.id_siswa ) AS CEK ");
+    //     return $q->row_array()['CEK'];
+    // }
 
     /* Untuk siswa */
     public function siswa_get_presensi() {
         $id_siswa = $this->session->userdata('user_id');
-        $get_id_eskul = $this->session->userdata('get_id_eskul');
         $q = $this->db->select('je.nama_ekskul, pr.tgl_presensi, pr.status_presensi, pr.ket_presensi')
                     ->from('presensi as pr')
                     ->join('pendaftaran as p', 'p.id_pendaftaran = pr.id_pendaftaran', 'LEFT')
@@ -49,6 +46,31 @@ class Presensi_model extends CI_Model {
                     ->join('siswa as s', 's.id_siswa = p.id_siswa', 'LEFT')
                     ->where('p.id_siswa', $id_siswa)->limit(3)->get()->result(); 
         return $q;
+    }
+
+    public function set_presensi_siswa($id) {
+        $now = new DateTime();
+        $addingTime = new DateInterval('P7D');
+        $date = DATE_ADD($now, $addingTime);
+        $calculate = DATE_FORMAT($date, '%Y-%m-%d %H:%M:%S');
+        
+        $set = [
+            'id_pendaftaran' => $id,
+            'tgl_presensi' => $calculate,
+        ];
+        $this->db->insert('presensi', $set);
+    }
+
+    public function kode_presensi() {
+        $q = $this->db->select('RIGHT(presensi.kode_presensi, 2) AS KODE', FALSE)
+                    ->order_by('kode_presensi', 'DESC')->limit(1)->get('presensi');
+        if ($q->num_rows() > 0) {
+            $data = $q->row();
+            $kode = intval($data->kode_presensi) + 1;
+        } else { $kode = 1; }
+        $batas = str_pad($kode, 2, "0", STR_PAD_LEFT);
+        $kodetampil = "PRESENSI-" . $batas;
+        return $kodetampil;
     }
 
     public function present($id) {

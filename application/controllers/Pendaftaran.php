@@ -5,6 +5,7 @@ class Pendaftaran extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model(['pendaftaran_model', 'ekstrakurikuler_model']);
+        $this->load->helper('tgl_indo_helper');
     }
 
     public function index() {
