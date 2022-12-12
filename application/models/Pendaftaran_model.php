@@ -4,11 +4,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Pendaftaran_model extends CI_Model {
     public function get($id = null) { //Untuk Pembina
         $id_ekskul = $this->session->userdata('pembina_ekskul');
-        $q=$this->db->select('p.*, pm.id_ekskul, je.nama_ekskul, s.nama_siswa, s.kelas')
+        $q=$this->db->select('p.*, pm.id_ekskul, je.nama_ekskul, s.nama_siswa, s.kelas, s.jurusan')
                     ->from('pendaftaran as p')
                     ->join('pembina as pm', 'pm.id_ekskul = p.id_ekskul', 'LEFT')
                     ->join('siswa as s', 's.id_siswa = p.id_siswa', 'LEFT')
                     ->join('jenis_eskul as je', 'je.id_ekskul = p.id_ekskul', 'LEFT')
+                    ->where('pm.id_pembina', $id_ekskul)
                     ->where('p.id_ekskul', $id_ekskul)
                     ->order_by('status_pendaftaran', 'BELUM SELEKSI')->get();
         if ($id != null) { $this->db->where('id_pendaftaran', $id); }

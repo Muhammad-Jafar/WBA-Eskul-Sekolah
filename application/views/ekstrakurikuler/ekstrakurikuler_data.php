@@ -1,7 +1,5 @@
 <section class="content-header">
-    <h1>
-        Ekstrakurikuler
-    </h1>
+    <h1>Ekstrakurikuler</h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-file"></i> Ekstrakurikuler</a></li>
         <li class="active">Data Ekstrakurikuler</li>
@@ -10,7 +8,7 @@
 
 <section class="content">
     <div class="box">
-        <div class="box-header">
+        <div class="box-header with-border">
             <h3 class="box-title">Data Ekstrakurikuler</h3>
             <div class="pull-right">
                 <a href="<?= site_url('ekstrakurikuler/add') ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah data</a>

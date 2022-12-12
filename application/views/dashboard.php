@@ -7,8 +7,8 @@
 				<div class="info-box">
 					<span class="info-box-icon bg-yellow"><i class="fa fa-pie-chart"></i></span>
 					<div class="info-box-content">
-						<span class="info-box-number">Ekstrakurikuler</span>
-						<span class="info-box-text"><?= $admin_eskul; ?></span>
+						<span class="info-box-text">Ekstrakurikuler</span>
+						<span class="info-box-number"><?= $admin_eskul?> Jenis</span>
 					</div>
 				</div>
 			</div>
@@ -16,8 +16,8 @@
 				<div class="info-box">
 					<span class="info-box-icon bg-green"><i class="fa fa-users"></i></span>
 					<div class="info-box-content">
-						<span class="info-box-number">Total Pendaftar</span>
-						<span class="info-box-text"><?= $admin_total_pendaftar; ?></span>
+						<span class="info-box-text">Total Pendaftar</span>
+						<span class="info-box-number"><?= $admin_total_pendaftar?> Siswa</span>
 					</div>
 				</div>
 			</div>
@@ -25,8 +25,8 @@
 				<div class="info-box">
 					<span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
 					<div class="info-box-content">
-						<span class="info-box-number">Total Siswa</span>
-						<span class="info-box-text"><?= $admin_total_siswa; ?></span>
+						<span class="info-box-text">Total Siswa</span>
+						<span class="info-box-number"><?= $admin_total_siswa?> Siswa</span>
 					</div>
 				</div>
 			</div>
@@ -34,8 +34,8 @@
 				<div class="info-box">
 					<span class="info-box-icon bg-red"><i class="fa fa-file-o"></i></span>
 					<div class="info-box-content">
-						<span class="info-box-number">Total Pembina</span>
-						<span class="info-box-text"><?= $admin_total_pembina; ?></span>
+						<span class="info-box-text">Total Pembina</span>
+						<span class="info-box-number"><?= $admin_total_pembina?> Pembina</span>
 					</div>
 				</div>
 			</div>
@@ -52,7 +52,7 @@
 					<span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
 					<div class="info-box-content">
 						<span class="info-box-number">Total Pendaftar</span>
-						<span class="info-box-text"><?= $admin_total_pendaftar;  ?></span>
+						<span class="info-box-text"> <b><?= $admin_total_pendaftar;?> </b> Siswa</span>
 					</div>
 				</div>
 			</div>

@@ -8,7 +8,7 @@
     </section>
     <section class="content">
         <div class="box">
-            <div class="box-header"><h3 class="box-title">Data Pendaftar Ekstrakurikuler</h3></div>
+            <div class="box-header with-border"><h3 class="box-title">Data Pendaftar Ekstrakurikuler</h3></div>
             <div class="box-body table-responsive">
                 <table class="table table-bordered table-striped text-center" id="datatable">
                     <thead>
@@ -16,6 +16,7 @@
                             <th>No.</th>
                             <th>Nama Siswa</th>
                             <th>Kelas</th>
+                            <th>Jurusan</th>
                             <th>Jenis Ekstrakurikuler</th>
                             <th>Tanggal Pendaftaran</th>
                             <th>Status Seleksi</th>
@@ -24,11 +25,12 @@
                     <tbody>
                         <?php $no = 1; foreach ($row->result() as $pendaftaran => $data) : ?>
                         <tr>
-                            <td><?= $no++ ?>.</td>
+                            <td> Pendaftar - <?= $no++ ?></td>
                             <td><?= $data->nama_siswa ?></td>
                             <td><?= $data->kelas ?></td>
+                            <td><?= $data->jurusan ?></td>
                             <td><?= $data->nama_ekskul ?></td>
-                            <td><?= tgl_indo_medium($data->tanggal_pendaftaran)  ?></td>
+                            <td><?= tgl_indo_medium($data->tanggal_pendaftaran)?></td>
                             <td width="12%">
                                 <?php if ($data->status_pendaftaran == 'BELUM SELEKSI') : ?>
                                     <a href="<?= site_url('pendaftaran/accept/' . $data->id_pendaftaran) ?>" class="btn btn-success btn-s"><i class="fa fa-check"></i> Terima</a>
@@ -88,7 +90,7 @@
                                 <td><?= $data->nama_ekskul ?></td>
                                 <td><?= $data->jadwal ?></td>
                                 <td><?= $data->tempat ?></td>
-                                <td><?= date_format( date_create($data->tanggal_pendaftaran), 'd - M - Y'); ?></td>
+                                <td><?= tgl_indo_medium($data->tanggal_pendaftaran); ?></td>
                                 <td> 
                                     <?php switch ($data->status_pendaftaran) :
                                         case 'TIDAK LULUS': 

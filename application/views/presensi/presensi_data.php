@@ -9,7 +9,7 @@
 
     <section class="content">
         <div class="box">
-            <div class="box-header">
+            <div class="box-header with-border">
                 <h3 class="box-title">Daftar Presensi Siswa </h3>
                 <div class="pull-right">
                     <a href="<?= site_url('presensi/add') ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Tambah Presensi</a>
@@ -22,6 +22,7 @@
                             <th>Nomor Presensi</th>
                             <th>Nama Siswa</th>
                             <th>Kelas</th>
+                            <th>Jurusan</th>
                             <th>Jenis Ekstrakurikuler</th>
                             <th>Data</th>
                             <th>Presensi</th>
@@ -36,6 +37,7 @@
                                 <td> Presensi ke- <?= $no++ ?> </td>
                                 <td><?= $data->nama_siswa ?></td>
                                 <td><?= $data->kelas ?></td>
+                                <td><?= $data->jurusan ?></td>
                                 <td><?= $data->nama_ekskul ?></td>
                                 <td width="12%">
                                     <?php if ( $tgl_sekarang > $tgl_presensi ) : ?>

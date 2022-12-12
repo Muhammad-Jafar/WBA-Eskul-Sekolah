@@ -1,7 +1,5 @@
 <section class="content-header">
-    <h1>
-        Berita
-    </h1>
+    <h1>Berita</h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-file"></i> Berita</a></li>
         <li class="active">Data Berita</li>
@@ -10,22 +8,23 @@
 
 <section class="content">
     <div class="box">
-        <div class="box-header">
+        <div class="box-header with-border">
             <h3 class="box-title">Data Berita</h3>
             <div class="pull-right">
-                <a href="<?= site_url('berita/add') ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Tambah data</a>
+                <a href="<?= site_url('berita/add') ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Tambah Berita</a>
             </div>
         </div>
         <div class="box-body table-responsive">
-            <table class="table table-bordered table-striped" id="datatable">
+            <table class="table table-bordered table-striped text-center" id="datatable">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Judul</th>
-                        <th>Keterangan</th>
+                        <th>No.</th>
+                        <th>Judul Berita</th>
+                        <th>Deskripsi Berita</th>
                         <th>Gambar</th>
                         <th>Tanggal Pos</th>
-                        <th>Action</th>
+                        <th>Aktivitas</th>
+                        <th>Data</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,14 +36,24 @@
                             <td><?= $data->keterangan ?></td>
                             <td><?= $data->gambar ?></td>
                             <td><?= $data->tanggal_pos ?></td>
-                            <td class="text-center" width="160px">
+                            <td width="17%">
+                                <?php if ($data->status_berita == 'Usai') : ?>
+                                    <a href="<?= site_url('berita/edit/' . $data->id_berita) ?>" class="btn btn-default disabled"><i class="fa fa-check"> ditampilkan</i></a>
+                                    <a href="<?= site_url('berita/edit/' . $data->id_berita) ?>" class="btn btn-danger"><i class="fa fa-close"> Sembunyikan</i></a>
+                                <?php else: ?>
+                                    <a href="<?= site_url('berita/edit/' . $data->id_berita) ?>" class="btn btn-default"><i class="fa fa-check"> Tampilkan</i></a>
+                                    <a href="<?= site_url('berita/edit/' . $data->id_berita) ?>" class="btn btn-danger disabled"><i class="fa fa-close"> disembunyikan</i></a>
+                                <?php endif; ?>
+                            </td>
+                            <td width="7%">
                                 <form action="<?= site_url('berita/delete') ?>" method="post">
-                                    <a href="<?= site_url('berita/edit/' . $data->id_berita) ?>" class="btn btn-primary btn-s"><i class="fa fa-pencil"></i></a>
+                                    <a href="<?= site_url('berita/edit/' . $data->id_berita) ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                                     <input type="hidden" name="id_berita" value="<?= $data->id_berita ?>">
-                                    <button onclick="return confirm('apakah anda ingin menghapus data ini ?')" class="btn btn-danger btn-s"><i class="fa fa-trash"></i></a>
+                                    <button onclick="return confirm('apakah anda ingin menghapus data ini ?')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                     </button>
                                 </form>
                             </td>
+                           
                         </tr>
                     <?php } ?>
                 </tbody>

@@ -37,8 +37,9 @@
                         <th>No.</th>
                         <th>Nama Lengkap</th>
                         <th>NIS</th>
-                        <th>Jenis Kelamin</th>
                         <th>Kelas</th>
+                        <th>Jurusan</th>
+                        <th>Jenis Kelamin</th>
                         <th>TTL</th>
                         <th>No Hp</th>
                         <th>Username</th>
@@ -51,8 +52,9 @@
                             <td><?= $no++ ?>.</td>
                             <td><?= $data->nama_siswa ?></td>
                             <td><?= $data->nis ?></td>
-                            <td><?= $data->jenis_kelamin ?></td>
                             <td><?= $data->kelas ?></td>
+                            <td><?= $data->jurusan ?></td>
+                            <td><?= $data->jenis_kelamin ?></td>
                             <td><?= $data->ttl ?></td>
                             <td><?= $data->no_hp ?></td>
                             <td><?= $data->username ?></td>

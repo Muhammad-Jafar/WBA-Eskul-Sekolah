@@ -11,7 +11,7 @@
 
     <section class="content">
         <div class="box">
-            <div class="box-header">
+            <div class="box-header with-border">
                 <h3 class="box-title">Data Penilaian Siswa</h3>
                 <!-- <div class="pull-right">
                     <a href="<?= site_url('nilai/add') ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Tambah Nilai</a>
@@ -24,6 +24,7 @@
                             <th>No.</th>
                             <th>Nama Siswa</th>
                             <th>Kelas</th>
+                            <th>Jurusan</th>
                             <th>Semester</th>
                             <th>Jenis Ekstrakurikuler</th>
                             <th>Total Kehadiran</th>
@@ -42,6 +43,7 @@
                                 <td><?= $no++ ?>.</td>
                                 <td><?= $data->nama_siswa ?></td>
                                 <td><?= $data->kelas ?></td>
+                                <td><?= $data->jurusan ?></td>
                                 <td><?= $data->semester ?></td>
                                 <td><?= $data->nama_ekskul ?></td>
                                 <td><?= $data->total_presensi ?></td>

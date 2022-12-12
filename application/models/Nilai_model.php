@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Nilai_model extends CI_Model {
     public function set_nilai($id = null) {
         $id_ekskul = $this->session->userdata('pembina_ekskul');
-        $q = $this->db->select('n.*, s.nama_siswa, s.kelas, je.nama_ekskul')
+        $q = $this->db->select('n.*, s.nama_siswa, s.kelas, s.jurusan, je.nama_ekskul')
                     ->from('nilai as n')
                     ->join('pendaftaran as p', 'p.id_pendaftaran = n.id_pendaftaran', 'LEFT')
                     ->join('siswa as s', 's.id_siswa = p.id_siswa', 'LEFT')
