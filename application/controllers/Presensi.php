@@ -5,6 +5,7 @@ class Presensi extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model(['presensi_model', 'pendaftaran_model']);
+        $this->load->helper('tgl_indo_helper');
     }
 
     public function index() {

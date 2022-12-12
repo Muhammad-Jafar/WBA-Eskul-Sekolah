@@ -11,9 +11,9 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Daftar Presensi Siswa </h3>
-                <div class="pull-right">
-                    <a href="<?= site_url('presensi/add') ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Tambah Presensi</a>
-                </div>
+                <!-- <div class="pull-right">
+                    <a href="#" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Tambah Presensi</a>
+                </div> -->
             </div>
             <div class="box-body table-responsive">
                 <table class="table table-bordered table-striped text-center" id="datatable">
@@ -24,6 +24,7 @@
                             <th>Kelas</th>
                             <th>Jurusan</th>
                             <th>Jenis Ekstrakurikuler</th>
+                            <th>Tanggal Presensi</th>
                             <th>Data</th>
                             <th>Presensi</th>
                         </tr>
@@ -32,6 +33,7 @@
                         <?php $no = 1; foreach ($set_presensi->result() as $presensi => $data) : 
                             $tgl_presensi = new DateTime($data->tgl_presensi);
                             $tgl_sekarang = new DateTime(); 
+                            $selisih = $tgl_sekarang->diff($tgl_presensi)->format("%a");
                         ?>
                             <tr>
                                 <td> Presensi ke- <?= $no++ ?> </td>
@@ -39,12 +41,13 @@
                                 <td><?= $data->kelas ?></td>
                                 <td><?= $data->jurusan ?></td>
                                 <td><?= $data->nama_ekskul ?></td>
+                                <td><?= tgl_indo_medium($data->tgl_presensi) ?></td>
                                 <td width="12%">
-                                    <?php if ( $tgl_sekarang > $tgl_presensi ) : ?>
-                                        <a onclick="return confirm('Presensi sudah dilakukan minggu ini !')" class="btn btn-default btn-s"><i class="fa fa-check"> Hadir</i></a>
-                                        <a onclick="return confirm('Presensi sudah dilakukan minggu ini!')" class="btn btn-default btn-s"><i class="fa fa-close"> Tidak</i></a>
+                                    <?php if ( $tgl_sekarang < $tgl_presensi && $selisih > 0) : ?>
+                                        <a onclick="return confirm('Presensi sudah dilakukan minggu ini !')" class="btn btn-default"><i class="fa fa-check"> Hadir</i></a>
+                                        <a onclick="return confirm('Presensi sudah dilakukan minggu ini!')" class="btn btn-default"><i class="fa fa-close"> Tidak</i></a>
                                     <?php else : ?>
-                                        <a href="<?= site_url('presensi/present/' . $data->id_presensi) ?>" class="btn btn-success btn-s"><i class="fa fa-check"> Hadir</i></a>
+                                        <a href="<?= site_url('presensi/present/' . $data->id_presensi) ?>" class="btn btn-success"><i class="fa fa-check"> Hadir</i></a>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-danger btn-s dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fa fa-close"> Tidak</i> <span class="caret"></span>
@@ -58,8 +61,8 @@
                                     <?php endif; ?>
                                  </td>
                                  <td width="10%">
-                                    <?php if ( $tgl_sekarang > $tgl_presensi ) : ?>
-                                        <a class="btn btn-default btn-s disabled"><i class="fa fa-check"> Presensi ditambahkan</i></a>
+                                    <?php if ( $tgl_sekarang < $tgl_presensi && $selisih > 0) : ?>
+                                        <a class="btn btn-default disabled"><i class="fa fa-check"> Presensi ditambahkan</i></a>
                                     <?php else : ?>
                                         <a href="<?= site_url('presensi/set_presensi/' . $data->id_pendaftaran) ?>" class="btn btn-default btn-s"><i class="fa fa-plus"> Tambah Presensi</i></a>
                                     <?php endif; ?>

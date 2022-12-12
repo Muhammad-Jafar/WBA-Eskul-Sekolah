@@ -41,7 +41,8 @@ class Auth_model extends CI_Model {
 			$this->session->set_userdata('pembina_kontak', $d->no_hp);
 			$this->session->set_userdata('pembina_id', $d->id_pembina);
 			$this->session->set_userdata('pembina_ekskul', $d->id_ekskul);
-			$nama_eskul = $this->db->query("SELECT je.nama_ekskul FROM pembina AS p JOIN jenis_eskul AS je WHERE p.id_pembina = $d->id_pembina && p.id_ekskul = $d->id_ekskul");
+			$nama_eskul = $this->db->query("SELECT je.nama_ekskul FROM pembina AS p JOIN jenis_eskul AS je 
+												WHERE p.id_pembina = $d->id_pembina && p.id_ekskul = $d->id_ekskul");
 			if ($nama_eskul->num_rows()) {
 				$q = $nama_eskul->row();
 				$this->session->set_userdata('nama_ekskul', $q->nama_ekskul);
@@ -51,7 +52,9 @@ class Auth_model extends CI_Model {
 		else if ($cek_login_siswa->num_rows()) {
 			$d = $cek_login_siswa->row();
 			$this->session->set_userdata('user_id', $d->id_siswa);
-			$cek_eskul = $this->db->query("SELECT p.id_siswa, p.id_ekskul, je.nama_ekskul FROM pendaftaran AS p JOIN siswa AS s JOIN jenis_eskul as je WHERE p.id_siswa = $d->id_siswa AND p.id_ekskul = je.id_ekskul LIMIT 3");
+			$cek_eskul = $this->db->query("SELECT p.id_siswa, p.id_ekskul, je.nama_ekskul 
+											FROM pendaftaran AS p JOIN siswa AS s JOIN jenis_eskul as je 
+											ON p.id_siswa = $d->id_siswa WHERE p.id_ekskul = je.id_ekskul LIMIT 3");
 			if ($cek_eskul-> num_rows()) {
 				$q = $cek_eskul->row();
 				$this->session->set_userdata('cek_eskul', $q->id_siswa);
