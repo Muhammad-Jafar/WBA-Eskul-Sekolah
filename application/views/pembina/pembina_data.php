@@ -42,10 +42,10 @@
 
                             <td class="text-center" width="160px">
                                 <form action="<?= site_url('pembina/delete') ?>" method="post">
-                                    <a href="<?= site_url('pembina/edit/' . $data->id_pembina) ?>" class="btn btn-primary btn-s"><i class="fa fa-pencil"></i></a>
+                                    <a href="<?= site_url('pembina/edit/' . $data->id_pembina) ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 
                                     <input type="hidden" name="id_pembina" value="<?= $data->id_pembina ?>">
-                                    <button onclick="return confirm('apakah anda ingin menghapus data ini ?')" class="btn btn-danger btn-s"><i class="fa fa-trash"></i></a>
+                                    <button onclick="return confirm('apakah anda ingin menghapus data ini ?')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                     </button>
                                 </form>
                             </td>

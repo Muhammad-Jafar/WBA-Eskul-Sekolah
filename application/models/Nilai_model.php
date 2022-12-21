@@ -10,7 +10,6 @@ class Nilai_model extends CI_Model {
                     ->join('siswa as s', 's.id_siswa = p.id_siswa', 'LEFT')
                     ->join('jenis_eskul as je', 'je.id_ekskul = p.id_ekskul', 'LEFT')
                     ->where('p.id_ekskul', $id_ekskul)->get();
-                    // ->order_by('je.id_ekskul');
         if ($id != null) { $this->db->where('n.id_pendaftaran', $id); }
         return $q;
     }
@@ -26,15 +25,16 @@ class Nilai_model extends CI_Model {
         return $q;
     }
 
-    public function set_nilai_siswa($id) {
+    public function set_nilai_siswa($post) {
         $set = [
-            // 'id_pendaftaran' => 'id_pendaftaran',
-            'total_nilai_ujian' => 'total_nilai_ujian',
-            'nilai_presensi' => 'nilai_presensi',
-            'nilai_ujian' => 'nilai_ujian',
-            'total' => 'total',
-            'predikat' => 'predikat',
+            'nilai_presensi'    => $post['nilai_presensi'],
+            'total_nilai_ujian' => $post['total_nilai_ujian'],
+            'nilai_ujian'       => $post['nilai_ujian'],
+            'total'             => $post['total'],
+            'predikat'          => $post['predikat'],
+            'status_penilaian'  => $post['Dinilai'],
         ];
-        $this->db->where('id_pendaftaran', $id)->update('nilai', $set);
+        $this->db->set('tgl_penilaian', 'NOW()', FALSE);
+        $this->db->where('id_pendaftaran', $post['id_pendaftaran'])->update('nilai', $set);
     }
 }

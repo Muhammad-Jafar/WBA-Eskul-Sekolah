@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2022 at 04:10 PM
+-- Generation Time: Dec 21, 2022 at 04:07 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -135,8 +135,8 @@ CREATE TABLE `nilai` (
 --
 
 INSERT INTO `nilai` (`id_nilai`, `id_pendaftaran`, `semester`, `total_presensi`, `nilai_presensi`, `total_nilai_ujian`, `nilai_ujian`, `total`, `predikat`, `status_penilaian`, `tgl_penilaian`) VALUES
-(1, 1, 'Semester 1', 14, 0, 0, 0, 0, 'E', 'Belum dinilai', '2022-12-12'),
-(2, 2, 'Semester 1', 10, 0, 0, 0, 0, 'E', 'Belum dinilai', '2022-12-12');
+(1, 1, 'Semester 1', 15, 38, 70, 28, 66, 'C', '', '2022-12-19'),
+(2, 2, 'Semester 1', 11, 0, 0, 0, 0, 'E', 'Belum dinilai', '2022-12-12');
 
 -- --------------------------------------------------------
 
@@ -224,7 +224,10 @@ INSERT INTO `presensi` (`id_presensi`, `id_pendaftaran`, `tgl_presensi`, `presen
 (7, 1, '2022-12-11', 1, 'Hadir', NULL),
 (10, 1, '2022-12-12', 1, 'Hadir', NULL),
 (11, 2, '2022-12-12', 1, 'Hadir', NULL),
-(16, 2, '2022-12-19', 0, 'Belum Hadir', NULL);
+(16, 2, '2022-12-19', 1, 'Hadir', NULL),
+(18, 2, '2022-12-26', 0, 'Belum Hadir', NULL),
+(19, 1, '2022-12-19', 1, 'Hadir', NULL),
+(20, 1, '2022-12-26', 0, 'Belum Hadir', NULL);
 
 --
 -- Triggers `presensi`
@@ -385,7 +388,7 @@ ALTER TABLE `pendaftaran`
 -- AUTO_INCREMENT for table `presensi`
 --
 ALTER TABLE `presensi`
-  MODIFY `id_presensi` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_presensi` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `siswa`

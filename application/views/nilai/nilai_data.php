@@ -13,9 +13,6 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Data Penilaian Siswa</h3>
-                <!-- <div class="pull-right">
-                    <a href="<?= site_url('nilai/add') ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Tambah Nilai</a>
-                </div> -->
             </div>
             <div class="box-body table-responsive">
                 <table class="table table-bordered table-striped text-center" id="datatable">
@@ -51,27 +48,13 @@
                                 <td><?= $data->total_nilai_ujian ?></td>
                                 <td><?= $data->nilai_ujian ?></td>
                                 <td><?= $data->total ?></td>
-                                <td>
-                                    <?php switch ($data->predikat) : 
-                                    case 'E':
-                                        echo '<p class="label label-danger">E</p>';
-                                    break;
-                                    case 'D':
-                                        echo '<p class="badge bg-red">E</p>';
-                                    break;
-                                    case 'C':
-                                        echo '<p class="badge bg-red">E</p>';
-                                    break;
-                                    case 'B':
-                                        echo '<p class="badge bg-red">E</p>';
-                                    break;
-                                    case 'A':
-                                        echo '<p class="badge bg-red"></p>';
-                                    break;
-                                    endswitch; ?>
-                                </td>
+                                <td><?= $data->predikat ?></td>
                                 <td class="text-center" width="7%">
-                                    <a href="<?= site_url('nilai/beri_nilai/' . $data->id_pendaftaran) ?>" class="btn btn-success"><i class="fa fa-edit"></i> Beri Nilai</a>
+                                    <?php if ($data->status_penilaian == 'Belum dinilai') : ?>
+                                        <a href="<?= site_url('nilai/beri_nilai/' . $data->id_pendaftaran) ?>" class="btn btn-success"><i class="fa fa-edit"></i> Beri Nilai</a>
+                                    <?php else : ?>
+                                        <a href="<?= site_url('nilai/beri_nilai/' . $data->id_pendaftaran) ?>" class="btn btn-default"><i class="fa fa-check"></i> Sudah dinilai</a>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php } ?>
