@@ -19,10 +19,10 @@ class Berita extends CI_Controller {
         $berita->judul = null;
         $berita->gambar = null;
         $berita->keterangan = null;
-        $data = array(
+        $data = [
             'page' => 'add',
             'row' => $berita
-        );
+        ];
         $this->template->load('template', 'berita/berita_form', $data);
     }
 
@@ -30,10 +30,10 @@ class Berita extends CI_Controller {
         $query = $this->berita_model->get($id);
         if ($query->num_rows() > 0) {
             $berita = $query->row();
-            $data = array(
+            $data = [
                 'page' => 'edit',
                 'row' => $berita
-            );
+            ];
             $this->template->load('template', 'berita/berita_form', $data);
         } else {
             echo "<script>alert('data berhasil di simpan');</script>";

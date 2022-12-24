@@ -38,11 +38,11 @@
                             <td><?= $data->tanggal_pos ?></td>
                             <td width="17%">
                                 <?php if ($data->status_berita == 'Usai') : ?>
-                                    <a href="<?= site_url('berita/edit/' . $data->id_berita) ?>" class="btn btn-default disabled"><i class="fa fa-check"> ditampilkan</i></a>
-                                    <a href="<?= site_url('berita/edit/' . $data->id_berita) ?>" class="btn btn-danger"><i class="fa fa-close"> Sembunyikan</i></a>
+                                    <a href="<?= site_url('berita/show/' . $data->id_berita) ?>" class="btn btn-default disabled"><i class="fa fa-check"> ditampilkan</i></a>
+                                    <a href="<?= site_url('berita/hide/' . $data->id_berita) ?>" class="btn btn-danger"><i class="fa fa-close"> Sembunyikan</i></a>
                                 <?php else: ?>
-                                    <a href="<?= site_url('berita/edit/' . $data->id_berita) ?>" class="btn btn-default"><i class="fa fa-check"> Tampilkan</i></a>
-                                    <a href="<?= site_url('berita/edit/' . $data->id_berita) ?>" class="btn btn-danger disabled"><i class="fa fa-close"> disembunyikan</i></a>
+                                    <a href="<?= site_url('berita/show/' . $data->id_berita) ?>" class="btn btn-default"><i class="fa fa-check"> Tampilkan</i></a>
+                                    <a href="<?= site_url('berita/hide/' . $data->id_berita) ?>" class="btn btn-danger disabled"><i class="fa fa-close"> disembunyikan</i></a>
                                 <?php endif; ?>
                             </td>
                             <td width="7%">

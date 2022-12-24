@@ -125,35 +125,18 @@
                                     <span>Data Ekskul</span>
                                 </a>
                             </li>
-                            <?php $id_siswa = $this->session->userdata('user_id');
-                                  $cek_eskul = $this->session->userdata('cek_eskul');
-                                  if ( $id_siswa == $cek_eskul) : ?>
-                                <li>
-                                    <a href="<?= site_url('presensi') ?>">
-                                        <i class="fa fa-file"></i>
-                                        <span>Presensi</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?= site_url('nilai') ?>">
-                                        <i class="fa fa-file"></i>
-                                        <span>Penilaian</span>
-                                    </a>
-                                </li>
-                            <?php else : ?>
-                                <li>
-                                    <a href="#" onclick="return confirm('Silahkan daftar eskul terlebih dahulu!')">
-                                        <i class="fa fa-file"></i>
-                                        <span> Absensi</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="return confirm('Silahkan daftar eskul terlebih dahulu!')">
-                                        <i class="fa fa-file"></i>
-                                        <span>Nilai Akhir</span>
-                                    </a>
-                                </li>
-                            <?php endif; ?>
+                            <li>
+                                <a href="<?= site_url('presensi') ?>">
+                                    <i class="fa fa-file"></i>
+                                    <span>Presensi</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= site_url('nilai') ?>">
+                                    <i class="fa fa-file"></i>
+                                    <span>Penilaian</span>
+                                </a>
+                            </li>
                         <?php endif; ?>
                 </section>
             </aside>

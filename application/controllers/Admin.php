@@ -12,24 +12,8 @@ class Admin extends CI_Controller {
 		redirect(base_url('admin'));
 	}
 
-    /** KELOLA DATA SISWA */
-
-    /** KELOLA DATA SISWA */
-
-    /** KELOLA DATA PEMBINA */
-
-    /** KELOLA DATA PEMBINA */
-
-    /** KELOLA DATA EKSKUL */
-
-    /** KELOLA DATA EKSKUL */
-
-    /** KELOLA DATA BERITA */
     public function berita() {
         $data['row'] = $this->admin_model->get();
         $this->template->load('template', 'berita/berita_data', $data);
     }
-
-
-    /** KELOLA DATA BERITA */
 }

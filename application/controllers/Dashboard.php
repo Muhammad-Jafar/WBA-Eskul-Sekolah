@@ -17,9 +17,10 @@ class Dashboard extends CI_Controller {
 		$data['admin_total_siswa'] = $this->dashboard_model->total_siswa();
 		$data['admin_total_pendaftar'] = $this->dashboard_model->total_pendaftar();
 		$data['admin_total_pembina'] = $this->dashboard_model->total_pembina();
-		$data['pembina_total_pendaftar'] = $this->dashboard_model->total_pendaftar();
+		$data['pembina_total_pendaftar'] = $this->dashboard_model->total_pendaftar_eskul();
 		$data['nama_eskul'] = $this->Dashboard_model->get_nama_eskul();
 		$data['pembina_eskul'] = $this->Dashboard_model->get_pembina_eskul();
+		$data['berita'] = $this->Dashboard_model->get_berita();
 		$this->template->load('template', 'dashboard', $data);
 	}
 }

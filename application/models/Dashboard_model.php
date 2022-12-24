@@ -14,7 +14,7 @@ class Dashboard_model extends CI_Model {
         return $q->row_array()['SISWA'];
     }
 
-    public function total_pendaftar() { // Gabung ke pembina
+    public function total_pendaftar() {
         $q = $this->db->query("SELECT (SELECT COUNT(p.id_siswa) FROM pendaftaran AS p JOIN siswa AS s WHERE p.id_siswa = s.id_siswa) AS PENDAFTAR");
         return $q->row_array()['PENDAFTAR'];
     }
@@ -25,7 +25,16 @@ class Dashboard_model extends CI_Model {
     }
 
     /* DASHBOARD PEMBINA */
+    public function get_berita() {
+        $berita = $this->db->query(" SELECT * FROM berita WHERE status_berita = 'Berlangsung' ");
+        return $berita->row();
+    }
 
+    public function total_pendaftar_eskul() {
+        $id_ekskul = $this->session->userdata('pembina_ekskul');
+        $q = $this->db->query("SELECT (SELECT COUNT(p.id_siswa) FROM pendaftaran AS p JOIN siswa AS s ON p.id_siswa = s.id_siswa WHERE p.id_ekskul = '$id_ekskul') AS PENDAFTAR");
+        return $q->row_array()['PENDAFTAR'];
+    }
 
     /* DASHBOARD SISWA */
     public function get_nama_eskul() {

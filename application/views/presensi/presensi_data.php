@@ -104,7 +104,7 @@
                                 <tr>
                                     <td> Presensi ke - <?= $no++?></td>
                                     <td><?= $data->nama_ekskul ?></td>
-                                    <td><?= $data->tgl_presensi ?></td>
+                                    <td><?= tgl_indo_medium($data->tgl_presensi) ?></td>
                                     <?php if ($data->status_presensi == 'Hadir' ) : ?>
                                         <td> 
                                             <label><badge class="badge bg-green"><i class="fa fa-check bg-green"></i></badge> 

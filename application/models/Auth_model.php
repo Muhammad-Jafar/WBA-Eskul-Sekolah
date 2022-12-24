@@ -41,14 +41,16 @@ class Auth_model extends CI_Model {
 			$this->session->set_userdata('pembina_kontak', $d->no_hp);
 			$this->session->set_userdata('pembina_id', $d->id_pembina);
 			$this->session->set_userdata('pembina_ekskul', $d->id_ekskul);
+
 			$nama_eskul = $this->db->query("SELECT je.nama_ekskul FROM pembina AS p JOIN jenis_eskul AS je 
 												WHERE p.id_pembina = $d->id_pembina && p.id_ekskul = $d->id_ekskul");
 			if ($nama_eskul->num_rows()) {
 				$q = $nama_eskul->row();
 				$this->session->set_userdata('nama_ekskul', $q->nama_ekskul);
 			}
+
 			redirect(base_url('dashboard'));
-		} 
+		}
 		else if ($cek_login_siswa->num_rows()) {
 			$d = $cek_login_siswa->row();
 			$this->session->set_userdata('user_id', $d->id_siswa);
@@ -70,6 +72,7 @@ class Auth_model extends CI_Model {
 			$this->session->set_userdata('siswa_kelas', $d->kelas);
 			$this->session->set_userdata('siswa_ttl', $d->ttl);
 			$this->session->set_userdata('siswa_no_hp', $d->no_hp);
+
 			redirect(base_url('dashboard'));
 		} 
 		else {

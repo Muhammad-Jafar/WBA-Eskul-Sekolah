@@ -34,8 +34,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 1;
-                        foreach ($set_nilai->result() as $nilai => $data) { ?>
+                        <?php $no = 1; foreach ($set_nilai->result() as $nilai => $data) : ?>
                             <tr>
                                 <td><?= $no++ ?>.</td>
                                 <td><?= $data->nama_siswa ?></td>
@@ -53,11 +52,11 @@
                                     <?php if ($data->status_penilaian == 'Belum dinilai') : ?>
                                         <a href="<?= site_url('nilai/beri_nilai/' . $data->id_pendaftaran) ?>" class="btn btn-success"><i class="fa fa-edit"></i> Beri Nilai</a>
                                     <?php else : ?>
-                                        <a href="<?= site_url('nilai/beri_nilai/' . $data->id_pendaftaran) ?>" class="btn btn-default"><i class="fa fa-check"></i> Sudah dinilai</a>
+                                        <a href="#" class="btn btn-default"><i class="fa fa-check"></i> Sudah dinilai</a>
                                     <?php endif; ?>
                                 </td>
                             </tr>
-                        <?php } ?>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
@@ -94,9 +93,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 1; foreach ($get_nilai as $nilai => $data) : 
-                            
-                        ?>
+                        <?php $no = 1; foreach ($get_nilai as $nilai => $data) : ?>
                             <tr>
                                 <td><?= $no++ ?>.</td>
                                 <td><?= $data->nama_ekskul ?></td>
@@ -106,25 +103,7 @@
                                 <td><?= $data->total_nilai_ujian ?></td>
                                 <td><?= $data->nilai_ujian ?></td>
                                 <td><?= $data->total ?></td>
-                                <td>
-                                    <?php switch ($data->predikat) : 
-                                    case 'E':
-                                        echo '<p class="label label-danger">E</p>';
-                                    break;
-                                    case 'D':
-                                        echo '<p class="badge bg-red">E</p>';
-                                    break;
-                                    case 'C':
-                                        echo '<p class="badge bg-red">E</p>';
-                                    break;
-                                    case 'B':
-                                        echo '<p class="badge bg-red">E</p>';
-                                    break;
-                                    case 'A':
-                                        echo '<p class="badge bg-red"></p>';
-                                    break;
-                                    endswitch; ?>
-                                </td>
+                                <td><?= $data->predikat ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
