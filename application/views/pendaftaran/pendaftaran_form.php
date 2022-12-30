@@ -23,6 +23,7 @@
                             <label>Jenis Kegiatan</label>
                             <select name="id_ekskul" class="form-control">
                                 <option disabled selected>Silahkan Pilih Jenis Ekstrakurikuler</option>
+                                
                                 <?php foreach ($eskul->result() as $key => $data) : ?>
                                     <option value="<?=$data->id_ekskul?>" <?=( ($cek != $data->id_ekskul) ? 'selected' : '');?> ><?=$data->nama_ekskul?></option>
                                 <?php endforeach; ?>

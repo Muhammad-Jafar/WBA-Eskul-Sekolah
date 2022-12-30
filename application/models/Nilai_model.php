@@ -9,9 +9,9 @@ class Nilai_model extends CI_Model {
                     ->join('pendaftaran as p', 'p.id_pendaftaran = n.id_pendaftaran', 'LEFT')
                     ->join('siswa as s', 's.id_siswa = p.id_siswa', 'LEFT')
                     ->join('jenis_eskul as je', 'je.id_ekskul = p.id_ekskul', 'LEFT')
-                    ->where('p.id_ekskul', $id_ekskul)->get();
+                    ->where('p.id_ekskul', $id_ekskul);
         if ($id != null) { $this->db->where('n.id_pendaftaran', $id); }
-        return $q;
+        return $q->get();
     }
 
     public function get_nilai() {

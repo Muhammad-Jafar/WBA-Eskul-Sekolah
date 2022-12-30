@@ -11,9 +11,7 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Daftar Presensi Siswa </h3>
-                <!-- <div class="pull-right">
-                    <a href="#" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i> Tambah Presensi</a>
-                </div> -->
+                <div class="pull-right"><a href="<?= site_url('presensi/cetak') ?>" class="btn btn-success"><i class="fa fa-print"></i> Cetak Data</a></div>
             </div>
             <div class="box-body table-responsive">
                 <table class="table table-bordered table-striped text-center" id="datatable">
@@ -42,7 +40,7 @@
                                 <td><?= $data->jurusan ?></td>
                                 <td><?= $data->nama_ekskul ?></td>
                                 <td><?= tgl_indo_medium($data->tgl_presensi) ?></td>
-                                <td width="12%">
+                                <td width="15%">
                                     <?php if ( $tgl_sekarang < $tgl_presensi && $selisih > 0) : ?>
                                         <a onclick="return confirm('Presensi sudah dilakukan minggu ini !')" class="btn btn-default"><i class="fa fa-check"> Hadir</i></a>
                                         <a onclick="return confirm('Presensi sudah dilakukan minggu ini!')" class="btn btn-default"><i class="fa fa-close"> Tidak</i></a>

@@ -8,14 +8,10 @@ class Pembina_model extends CI_Model {
     }
 
     public function get($id = null) {
-        $this->db->select('p.*, je.nama_ekskul');
-        $this->db->from('pembina as p');
-        $this->db->join('jenis_eskul as je', 'je.id_ekskul = p.id_ekskul');
-        if ($id != null) {
-            $this->db->where('id_pembina', $id);
-        }
-        $query = $this->db->get();
-        return $query;
+        $q = $this->db->select('p.*, je.nama_ekskul')->from('pembina as p')
+                    ->join('jenis_eskul as je', 'je.id_ekskul = p.id_ekskul');
+        if ($id != null) { $this->db->where('id_pembina', $id); }
+        return $q->get();
     }
 
     public function add($post) {
@@ -38,7 +34,6 @@ class Pembina_model extends CI_Model {
             'jenis_kelamin' => $post['jenis_kelamin'],
             'no_hp'         => $post['no_hp'],
             'id_ekskul'     => $post['id_ekskul'],
-            // 'username'      => $post['username'],
         ];
         $this->db->where('id_pembina', $post['id_pembina'])->update('pembina', $params);
     }

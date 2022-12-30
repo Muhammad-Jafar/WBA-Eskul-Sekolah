@@ -7,9 +7,12 @@ use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 class Siswa extends CI_Controller {
     function __construct() {
         parent::__construct();
-        check_admin(); // ambil dari fungsi helper
         $this->load->model('siswa_model');
         $this->load->library('form_validation');
+
+        isnt_login(function() { 
+			redirect( site_url('auth/login') );
+		});
     }
 
     public function index(){
@@ -104,45 +107,47 @@ class Siswa extends CI_Controller {
         $this->load->view('siswa/siswa_print', $data);
     }
 
-    public function import() {
-        $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'xlsx|xls';
-        $config['file_name'] = 'doc' . time();
-        $this->load->library('upload', $config);
-        if ($this->upload->do_upload('importexcel')) {
-            $file = $this->upload->data();
-            $reader = ReaderEntityFactory::createXLSXReader();
+    public function impor() {
+        $this->load->view('siswa/siswa_impor');
 
-            $reader->open('uploads/' . $file['file_name']);
+        // $config['upload_path'] = './uploads/';
+        // $config['allowed_types'] = 'xlsx|xls';
+        // $config['file_name'] = 'doc' . time();
+        // $this->load->library('upload', $config);
+        // if ($this->upload->do_upload('importexcel')) {
+        //     $file = $this->upload->data();
+        //     $reader = ReaderEntityFactory::createXLSXReader();
 
-            foreach ($reader->getSheetIterator() as $sheet) {
-                $numRow = 1;
-                foreach ($sheet->getRowIterator() as $row) {
-                    if ($numRow > 1) {
-                        $siswa = array(
-                            'nama_siswa' => $row->getCellAtIndex(1),
-                            'nis' => $row->getCellAtIndex(2),
-                            'jenis_kelamin' => $row->getCellAtIndex(3),
-                            'kelas' => $row->getCellAtIndex(4),
-                            'ttl' => $row->getCellAtIndex(5),
-                            'no_hp' => $row->getCellAtIndex(6),
-                            'username' => $row->getCellAtIndex(7),
-                            'password' => md5($row->getCellAtIndex(8)),
-                            'id_level' => $row->getCellAtIndex(9),
-                        );
-                        $this->siswa_model->import_data($siswa);
-                    }
-                    $numRow++;
-                }
-                $reader->close();
-                unlink('uploads/' . $file['file_name']);
-                echo "<script>
-                alert('data berhasil di tambahkan');
-                window.location='" . site_url('siswa') . "';
-                </script>";
-            }
-        } else {
-            echo "error :" . $this->upload->display_errors();
-        };
+        //     $reader->open('uploads/' . $file['file_name']);
+
+        //     foreach ($reader->getSheetIterator() as $sheet) {
+        //         $numRow = 1;
+        //         foreach ($sheet->getRowIterator() as $row) {
+        //             if ($numRow > 1) {
+        //                 $siswa = array(
+        //                     'nama_siswa' => $row->getCellAtIndex(1),
+        //                     'nis' => $row->getCellAtIndex(2),
+        //                     'jenis_kelamin' => $row->getCellAtIndex(3),
+        //                     'kelas' => $row->getCellAtIndex(4),
+        //                     'ttl' => $row->getCellAtIndex(5),
+        //                     'no_hp' => $row->getCellAtIndex(6),
+        //                     'username' => $row->getCellAtIndex(7),
+        //                     'password' => md5($row->getCellAtIndex(8)),
+        //                     'id_level' => $row->getCellAtIndex(9),
+        //                 );
+        //                 $this->siswa_model->import_data($siswa);
+        //             }
+        //             $numRow++;
+        //         }
+        //         $reader->close();
+        //         unlink('uploads/' . $file['file_name']);
+        //         echo "<script>
+        //         alert('data berhasil di tambahkan');
+        //         window.location='" . site_url('siswa') . "';
+        //         </script>";
+        //     }
+        // } else {
+        //     echo "error :" . $this->upload->display_errors();
+        // };
     }
 }

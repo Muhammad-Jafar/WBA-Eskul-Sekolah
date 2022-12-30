@@ -5,6 +5,11 @@ class Nilai extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model(['nilai_model', 'pendaftaran_model']);
+        $this->load->library('form_validation');
+        
+        isnt_login(function() { 
+			redirect( site_url('auth/login') );
+		});
     }
 
     public function index() {

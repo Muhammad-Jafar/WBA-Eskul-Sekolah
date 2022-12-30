@@ -27,7 +27,7 @@ class Dashboard_model extends CI_Model {
     /* DASHBOARD PEMBINA */
     public function get_berita() {
         $berita = $this->db->query(" SELECT * FROM berita WHERE status_berita = 'Berlangsung' ");
-        return $berita->row();
+        return $berita;
     }
 
     public function total_pendaftar_eskul() {

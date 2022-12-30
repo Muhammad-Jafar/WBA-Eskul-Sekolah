@@ -1,0 +1,132 @@
+[33mcommit af3f999659555aad1aaf51aea5fc0532832a1b0c[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Sat Dec 24 16:11:16 2022 +0800
+
+    Update myekskul2.sql
+
+[33mcommit 26fb8a8a22163ec4a1cc0e5655c2fd5c4bb05ec5[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Sat Dec 24 16:11:13 2022 +0800
+
+    Fix show berita in dashboard
+
+[33mcommit be4cc1f1d6eb1e0cc6aa54bf1970e05e68c531c4[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Wed Dec 21 11:08:19 2022 +0800
+
+    Fix Nilai Features
+
+[33mcommit f0a0489c232ed60198a010afa70fb80290116f84[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Mon Dec 12 23:12:41 2022 +0800
+
+    Update presensi feature
+    
+    Include :
+    1. Fix add presensi
+    2. Fix set Hadir or Tidak hadir of status_presensi
+    3. Fix table relation
+
+[33mcommit 914aca63d7b2d9ffce546d67bada809435a4e74b[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Mon Dec 12 15:22:04 2022 +0800
+
+    Update after reinstall XAMPP
+    
+    include :
+    1. Refill data in table
+    2. Add column status_berita in berita table
+    3. Add column status_penilaian & tgl_penilaian in nilai table
+    4. change column id_siswa to id_pendaftaran in nilai table
+    5. Give default value for all columns in nilai table except id_nilai & id_pendaftaran
+
+[33mcommit 8fa302329ad12c9256ffe958141e6e333503049c[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Mon Dec 12 11:57:06 2022 +0800
+
+    Update myekskul2.sql
+
+[33mcommit a58b007cf8415a938c8d9ab71444f18dbd0ea648[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Sun Dec 11 22:49:04 2022 +0800
+
+    Fix date format in Indonesia date
+
+[33mcommit f0f8e4e0eb7efa66796d0e13a25617a1869a5950[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Wed Dec 7 23:28:00 2022 +0800
+
+    Update database for safe
+
+[33mcommit 4f1292dda202db6355bce7f237366fd4b08e16a3[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Wed Dec 7 22:23:15 2022 +0800
+
+    Update database
+
+[33mcommit dbad0bf6bfd9845c9a50c4055bf78565018348f9[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Tue Dec 6 22:43:02 2022 +0800
+
+    Assessment Features
+    
+    1. Fix the table field in database
+    2. Fix for show data to user
+    
+    Next update will be :
+    - Testing trigger for relate table field
+    - Input data assessment to the database from pembina
+
+[33mcommit cd972648e41a52aee8ecd09e2572ab4fdc354ae9[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Wed Nov 30 23:50:56 2022 +0800
+
+    Update pendaftaran & Fix presensi features
+    
+    1. Update the field of pendaftaran tabel so the data will keep show either the status change from BELUM SELEKSI to LULUS or TIDAK LULUS or what ever the data status they are
+    2. Fixed showing data presensi to each view either  pembina or siswa
+
+[33mcommit 5006c88877a03eab0499a7438f681c6d5a47f07c[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Tue Nov 29 11:47:58 2022 +0800
+
+    Fix registration proccess
+    
+    Registration proccess include :
+    1. Student create a request for registration eskul
+    2. Coach accept or reject the request from students
+    3. back end process change the status_pendaftaran between LULUS or TIDAK LULUS
+
+[33mcommit 664bc98ce1ba2a3b8764ef6bf3929cd9646c280f[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Sun Nov 27 15:51:44 2022 +0800
+
+    Restructure Folder V1
+
+[33mcommit 237ab895372cdaaecbc7007e04d07467be42a546[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Sun Nov 27 15:24:40 2022 +0800
+
+    Update redme-v2
+
+[33mcommit 267141e527c5ed3cf973270648c2a56ff5f54d36[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Sun Nov 27 15:22:18 2022 +0800
+
+    Update Redme
+
+[33mcommit 10e272cafafd5c8e8c8e5aff42c9b2a09411f0b3[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Sun Nov 27 15:12:46 2022 +0800
+
+    Fixed Admin Features
+    
+    Admin features such as CRUD for pembina, siswa, eskul and news data.
+
+[33mcommit 9e99d1e88f89a44e20c4fcb46d105c27c321dabe[m
+Author: Muhammad-Jafar <131.powerfull@gmail.com>
+Date:   Fri Nov 25 00:24:23 2022 +0800
+
+    First commit
+    
+    Feature admin completed

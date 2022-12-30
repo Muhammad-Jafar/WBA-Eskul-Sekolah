@@ -4,8 +4,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Ekstrakurikuler extends CI_Controller {
     function __construct() {
         parent::__construct();
-        check_admin(); // ambil dari fungsi helper
         $this->load->model('ekstrakurikuler_model');
+
+        isnt_login(function() { 
+			redirect( site_url('auth/login') );
+		});
     }
 
     public function index() {
@@ -19,11 +22,7 @@ class Ekstrakurikuler extends CI_Controller {
         $ekstrakurikuler->nama_ekskul = null;
         $ekstrakurikuler->jadwal = null;
         $ekstrakurikuler->tempat = null;
-        $data = array(
-            'page' => 'add',
-            'row' => $ekstrakurikuler
-        );
-
+        $data = [ 'page' => 'add', 'row' => $ekstrakurikuler ];
         $this->template->load('template', 'ekstrakurikuler/ekstrakurikuler_form', $data);
     }
 
@@ -31,10 +30,7 @@ class Ekstrakurikuler extends CI_Controller {
         $query = $this->ekstrakurikuler_model->get($id);
         if ($query->num_rows() > 0) {
             $ekstrakurikuler = $query->row();
-            $data = array(
-                'page' => 'edit',
-                'row' => $ekstrakurikuler
-            );
+            $data = [ 'page' => 'edit', 'row' => $ekstrakurikuler ];
             $this->template->load('template', 'ekstrakurikuler/ekstrakurikuler_form', $data);
         } else {
             echo "<script>alert('data berhasil di simpan');</script>";

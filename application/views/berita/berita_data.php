@@ -21,31 +21,28 @@
                         <th>No.</th>
                         <th>Judul Berita</th>
                         <th>Deskripsi Berita</th>
-                        <th>Gambar</th>
                         <th>Tanggal Pos</th>
                         <th>Aktivitas</th>
                         <th>Data</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $no = 1;
-                    foreach ($row->result() as $berita => $data) { ?>
+                    <?php $no = 1; foreach ($row->result() as $berita => $data) : ?>
                         <tr>
                             <td><?= $no++ ?>.</td>
                             <td><?= $data->judul ?></td>
                             <td><?= $data->keterangan ?></td>
-                            <td><?= $data->gambar ?></td>
                             <td><?= $data->tanggal_pos ?></td>
-                            <td width="17%">
+                            <td width="22%">
                                 <?php if ($data->status_berita == 'Usai') : ?>
-                                    <a href="<?= site_url('berita/show/' . $data->id_berita) ?>" class="btn btn-default disabled"><i class="fa fa-check"> ditampilkan</i></a>
+                                    <a href="#" class="btn btn-default disabled"><i class="fa fa-check"> ditampilkan</i></a>
                                     <a href="<?= site_url('berita/hide/' . $data->id_berita) ?>" class="btn btn-danger"><i class="fa fa-close"> Sembunyikan</i></a>
                                 <?php else: ?>
                                     <a href="<?= site_url('berita/show/' . $data->id_berita) ?>" class="btn btn-default"><i class="fa fa-check"> Tampilkan</i></a>
-                                    <a href="<?= site_url('berita/hide/' . $data->id_berita) ?>" class="btn btn-danger disabled"><i class="fa fa-close"> disembunyikan</i></a>
+                                    <a href="#" class="btn btn-danger disabled"><i class="fa fa-close"> disembunyikan</i></a>
                                 <?php endif; ?>
                             </td>
-                            <td width="7%">
+                            <td width="10%">
                                 <form action="<?= site_url('berita/delete') ?>" method="post">
                                     <a href="<?= site_url('berita/edit/' . $data->id_berita) ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                                     <input type="hidden" name="id_berita" value="<?= $data->id_berita ?>">
@@ -53,9 +50,8 @@
                                     </button>
                                 </form>
                             </td>
-                           
                         </tr>
-                    <?php } ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

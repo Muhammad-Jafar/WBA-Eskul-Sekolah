@@ -11,6 +11,15 @@ class Auth extends CI_Controller {
         $this->auth_model = $this->Auth_model;
     }
 
+    public function index()  {
+		is_login(function() {
+			redirect( base_url('dashboard') );
+		});
+		isnt_login(function() {
+			redirect( base_url('auth/login') );
+		});
+	}
+
     public function login() {
         is_login(function () {
             redirect(base_url('dashboard'));
@@ -44,7 +53,6 @@ class Auth extends CI_Controller {
         }
     }
 
-    //fungsi logout diganti
     public function logout() {
         isnt_login(function () {
             redirect('auth/login');

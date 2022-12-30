@@ -4,8 +4,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Berita extends CI_Controller {
     function __construct() {
         parent::__construct();
-        check_admin(); // ambil dari fungsi helper
         $this->load->model('berita_model');
+
+        isnt_login(function() { 
+			redirect( site_url('auth/login') );
+		});
     }
 
     public function index() {
@@ -15,14 +18,9 @@ class Berita extends CI_Controller {
 
     public function add() {
         $berita = new stdClass();
-        $berita->id_berita = null;
         $berita->judul = null;
-        $berita->gambar = null;
         $berita->keterangan = null;
-        $data = [
-            'page' => 'add',
-            'row' => $berita
-        ];
+        $data = [ 'page' => 'add', 'row' => $berita ];
         $this->template->load('template', 'berita/berita_form', $data);
     }
 
@@ -30,13 +28,10 @@ class Berita extends CI_Controller {
         $query = $this->berita_model->get($id);
         if ($query->num_rows() > 0) {
             $berita = $query->row();
-            $data = [
-                'page' => 'edit',
-                'row' => $berita
-            ];
+            $data = [ 'page' => 'edit', 'row' => $berita ];
             $this->template->load('template', 'berita/berita_form', $data);
         } else {
-            echo "<script>alert('data berhasil di simpan');</script>";
+            echo "<script>alert('Data berhasil di simpan');</script>";
             redirect('berita');
         }
     }
@@ -61,6 +56,16 @@ class Berita extends CI_Controller {
         if ($this->db->affected_rows() > 0) {
             echo "<script>alert('data berhasil di hapus');</script>";
         }
+        redirect('berita');
+    }
+
+    public function show($id) {
+        $this->berita_model->show_berita($id);
+        redirect('berita');
+    }
+
+    public function hide($id) {
+        $this->berita_model->hide_berita($id);
         redirect('berita');
     }
 }

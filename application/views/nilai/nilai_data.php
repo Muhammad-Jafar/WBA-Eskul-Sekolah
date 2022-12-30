@@ -1,8 +1,6 @@
 <?php if ($this->session->userdata('user_type') == 'pembina') : ?>
     <section class="content-header">
-        <h1>
-            PENILAIAN
-        </h1>
+        <h1>PENILAIAN</h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-file"></i> Penilaian</a></li>
             <li class="active">Data Penilaian Siswa</li>
@@ -13,6 +11,7 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Data Penilaian Siswa</h3>
+                <div class="pull-right"><a href="" class="btn btn-success"><i class="fa fa-print"></i> Cetak Data</a></div>
             </div>
             <div class="box-body table-responsive">
                 <table class="table table-bordered table-striped text-center" id="datatable">
@@ -48,7 +47,7 @@
                                 <td><?= $data->nilai_ujian ?></td>
                                 <td><?= $data->total ?></td>
                                 <td><?= $data->predikat ?></td>
-                                <td class="text-center" width="7%">
+                                <td class="text-center" width="10%">
                                     <?php if ($data->status_penilaian == 'Belum dinilai') : ?>
                                         <a href="<?= site_url('nilai/beri_nilai/' . $data->id_pendaftaran) ?>" class="btn btn-success"><i class="fa fa-edit"></i> Beri Nilai</a>
                                     <?php else : ?>
@@ -74,9 +73,7 @@
 
     <section class="content">
         <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">Data Penilaian</h3>
-            </div>
+            <div class="box-header"><h3 class="box-title">Data Penilaian</h3></div>
             <div class="box-body table-responsive">
                 <table class="table table-bordered table-striped text-center" id="datatable">
                     <thead>

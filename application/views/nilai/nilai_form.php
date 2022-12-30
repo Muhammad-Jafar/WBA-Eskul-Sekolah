@@ -9,11 +9,11 @@
 <section class="content">
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title"> Silahkan Lengkapi penilaian berikut</h3>
+            <h3 class="box-title"> Silahkan lengkapi penilaian berikut</h3>
             <div class="pull-right"><a href="<?= site_url('nilai') ?>" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Kembali</a></div>
         </div>
         <div class="box-body">
-            <form class="form-horizontal" action="" method="post">
+            <form class="form-horizontal">
                 <input type="hidden" name="id_level" value="<?= $this->session->userdata('user_type'); ?>">
                 <div class="box-header">
                     <div class="box-body col-md-4 col-md-offset-4">
@@ -33,7 +33,6 @@
                     <div class="row">
                         <div class="col-md-4 col-md-offset-4">
                             <form action="" method="post">
-                            <input type="hidden" name="id_pendaftaran" value="<?= $row->id_pendaftaran; set_value('id_pendaftaran'); ?>" class="form-control">
                                 <div class="form-group  <?= form_error('nilai_presensi') ? 'has-error' : null ?>">
                                     <label>Presentase Nilai Presensi</label>
                                     <div class="input-group">

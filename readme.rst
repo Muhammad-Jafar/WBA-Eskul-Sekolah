@@ -9,10 +9,10 @@ Version 1.0
 
 Build with
 ================================
--> PHP version 7.4.29\n
+-> PHP version 7.4.33\n
 -> Codeigniter v3\n
 -> Database MySQL\n
 
 For more information
 ================================
-Contact developer from bio.\n
+Contact developer from bio.\n   

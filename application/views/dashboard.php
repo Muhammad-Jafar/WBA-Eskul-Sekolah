@@ -42,7 +42,6 @@
 		</div>
 	</section>
 <?php endif; ?>
-
 <?php if ($this->session->userdata('user_type') == 'pembina') : ?>
 	<section class="content-header"><h1>Dashboard</h1></section>
 	<section class="content">
@@ -59,29 +58,18 @@
 					</div>
 					<div class="box-body">
 						<div class="row">
-							<!-- <?php if ($berita->status_berita == 'Berlangsung') : ?> -->
-								<dl class="dl-horizontal">
-									<dt>JUDUL</dt>
-									<dd><?= $berita->judul ?></dd>
-									<dt>INFORMASI</dt>
-									<dd><?= $berita->keterangan ?></dd>
-									<dt>WAKTU UPLOAD</dt>
-									<dd><?= $berita->tanggal_pos ?></dd>
-									<dt>PENANGGUNG JAWAB</dt>
-									<dd>ADMIN</dd>
-								</dl>
-							<!-- <?php else : ?> -->
-								<dl class="dl-horizontal">
-									<dt>JUDUL</dt>
-									<dd> Tidak ada Informasi</dd>
-									<dt>INFORMASI</dt>
-									<dd>Tidak ada Informasi</dd>
-									<dt>WAKTU UPLOAD</dt>
-									<dd>Tidak ada Informasi</dd>
-									<dt>PENANGGUNG JAWAB</dt>
-									<dd>ADMIN</dd>
-								</dl>
-							<!-- <?php endif; ?>	 -->
+							<?php foreach ($berita->result() as $core => $berita) : ?>
+									<dl class="dl-horizontal">
+										<dt>JUDUL</dt>
+										<dd><?= $berita->judul ?></dd>
+										<dt>INFORMASI</dt>
+										<dd><?= $berita->keterangan ?></dd>
+										<dt>WAKTU UPLOAD</dt>
+										<dd><?= $berita->tanggal_pos ?></dd>
+										<dt>PENANGGUNG JAWAB</dt>
+										<dd>ADMIN</dd>
+									</dl>
+							<?php endforeach; ?>
 						</div>
 					</div>
 				</div>
@@ -114,29 +102,18 @@
 					</div>
 					<div class="box-body">
 						<div class="row">
-							<!-- <?php if ($berita->status_berita == 'Berlangsung') : ?> -->
-								<dl class="dl-horizontal">
-									<dt>JUDUL</dt>
-									<dd><?= $berita->judul ?></dd>
-									<dt>INFORMASI</dt>
-									<dd><?= $berita->keterangan ?></dd>
-									<dt>WAKTU UPLOAD</dt>
-									<dd><?= $berita->tanggal_pos ?></dd>
-									<dt>PENANGGUNG JAWAB</dt>
-									<dd>ADMIN</dd>
-								</dl>
-							<!-- <?php else : ?> -->
-								<dl class="dl-horizontal">
-									<dt>JUDUL</dt>
-									<dd> Tidak ada Informasi</dd>
-									<dt>INFORMASI</dt>
-									<dd>Tidak ada Informasi</dd>
-									<dt>WAKTU UPLOAD</dt>
-									<dd>Tidak ada Informasi</dd>
-									<dt>PENANGGUNG JAWAB</dt>
-									<dd>ADMIN</dd>
-								</dl>
-							<!-- <?php endif; ?>	 -->
+							<?php foreach ($berita->result() as $core => $berita) : ?>
+									<dl class="dl-horizontal">
+										<dt>JUDUL</dt>
+										<dd><?= $berita->judul ?></dd>
+										<dt>INFORMASI</dt>
+										<dd><?= $berita->keterangan ?></dd>
+										<dt>WAKTU UPLOAD</dt>
+										<dd><?= $berita->tanggal_pos ?></dd>
+										<dt>PENANGGUNG JAWAB</dt>
+										<dd>ADMIN</dd>
+									</dl>
+							<?php endforeach; ?>
 						</div>
 					</div>
 				</div>

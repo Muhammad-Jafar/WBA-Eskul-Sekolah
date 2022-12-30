@@ -46,16 +46,6 @@
                 <div class="box-footer">
                     <button class="btn btn-primary submit-btn btn-block">Login</button>
                 </div>
-                <!-- <div class="row"> -->
-                    <!-- <div class="col-xs-8">
-                        <div class="checkbox icheck">
-                            <label><input type="checkbox"> Remember me ?</label>
-                        </div>
-                    </div> -->
-                    <!-- <div class="col-xs-4"> -->
-                        <!-- <button class="btn btn-primary submit-btn btn-block">Login</button> -->
-                    <!-- </div> -->
-                <!-- </div> -->
                 <?= form_close(); ?>
             </div>
         </div>

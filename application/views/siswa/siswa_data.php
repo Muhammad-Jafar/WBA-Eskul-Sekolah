@@ -13,22 +13,8 @@
             <div class="pull-right">
                 <a href="<?= site_url('siswa/add') ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah data</a>
                 <a href="<?= site_url('siswa/cetak') ?>" class="btn btn-info"><i class="fa fa-print"></i> Cetak data</a>
-                <button type="file" class="form-control-file btn btn-success" id="importexcel" name="importexcel" accept=".xlsx,.xls"><i class="fa fa-table"></i> 
-                    Impor Data
-                </button>
+                <a href="<?= site_url('siswa/impor') ?>" class="btn btn-success"><i class="fa fa-table"></i> Impor data</a>
             </div>
-            <!-- <div class="pull-left">
-                <?= form_open_multipart('siswa/import') ?>
-                    <div class="form-row">
-                        <div class="col-md-4">
-                            <input type="file" class="form-control-file" id="importexcel" name="importexcel" accept=".xlsx,.xls">
-                        </div>
-                        <div class="col-md-8">
-                            <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-table"></i> Import</button>
-                        </div>
-                    </div>
-                <?= form_close(); ?>
-            </div> -->
         </div>
         <div class="box-body table-responsive">
             <table class="table table-bordered table-striped" id="datatable">

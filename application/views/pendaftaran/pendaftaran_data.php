@@ -31,7 +31,7 @@
                             <td><?= $data->jurusan ?></td>
                             <td><?= $data->nama_ekskul ?></td>
                             <td><?= tgl_indo_medium($data->tanggal_pendaftaran)?></td>
-                            <td width="12%">
+                            <td width="15%">
                                 <?php if ($data->status_pendaftaran == 'BELUM SELEKSI') : ?>
                                     <a href="<?= site_url('pendaftaran/accept/' . $data->id_pendaftaran) ?>" class="btn btn-success btn-s"><i class="fa fa-check"></i> Terima</a>
                                     <a href="<?= site_url('pendaftaran/reject/' . $data->id_pendaftaran) ?>" class="btn btn-danger btn-s"><i class="fa fa-close"></i> Tolak</a>
@@ -49,7 +49,6 @@
         </div>
     </section>
 <?php endif; ?>
-
 <?php if ($this->session->userdata('user_type') == 'siswa') : ?>
     <section class="content-header">
         <h1>EKSTRAKURIKULER</h1>

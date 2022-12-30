@@ -4,9 +4,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Pembina extends CI_Controller {
     function __construct() {
         parent::__construct();
-        check_admin(); // ambil dari fungsi helper
         $this->load->model('pembina_model');
         $this->load->library('form_validation');
+
+        isnt_login(function() { 
+			redirect( site_url('auth/login') );
+		});
     }
 
     public function index() {
@@ -48,7 +51,6 @@ class Pembina extends CI_Controller {
         $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required');
         $this->form_validation->set_rules('no_hp', 'No Hp', 'required');
         $this->form_validation->set_rules('id_ekskul', 'Jenis Ekskul', 'required');
-        // $this->form_validation->set_rules('username', 'Username', 'required|min_length[3]|is_unique[pembina.username]');
 
         $this->form_validation->set_message('required', '%s tidak boleh kosong');
         $this->form_validation->set_message('min_length', '{field} minimal 3 karakter');
@@ -90,7 +92,6 @@ class Pembina extends CI_Controller {
     public function delete() {
         $id = $this->input->post('id_pembina');
         $this->pembina_model->delete($id);
-
         if ($this->db->affected_rows() > 0) {
             echo "<script>alert('data berhasil di hapus');</script>";
         }

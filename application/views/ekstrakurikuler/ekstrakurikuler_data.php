@@ -27,8 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $no = 1;
-                    foreach ($row->result() as $ekskul => $data) { ?>
+                    <?php $no = 1; foreach ($row->result() as $ekskul => $data) : ?>
                         <tr>
                             <td><?= $no++ ?>.</td>
                             <td><?= $data->nama_ekskul ?></td>
@@ -37,14 +36,13 @@
                             <td class="text-center" width="160px">
                                 <form action="<?= site_url('ekstrakurikuler/delete') ?>" method="post">
                                     <a href="<?= site_url('ekstrakurikuler/edit/' . $data->id_ekskul) ?>" class="btn btn-primary btn-s"><i class="fa fa-pencil"></i></a>
-
                                     <input type="hidden" name="id_ekskul" value="<?= $data->id_ekskul ?>">
                                     <button onclick="return confirm('apakah anda ingin menghapus data ini ?')" class="btn btn-danger btn-s"><i class="fa fa-trash"></i></a>
                                     </button>
                                 </form>
                             </td>
                         </tr>
-                    <?php } ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
