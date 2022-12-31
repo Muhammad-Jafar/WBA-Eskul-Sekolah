@@ -11,9 +11,14 @@
         <div class="box-header with-border">
             <h3 class="box-title">Daftar Seluruh Siswa</h3>
             <div class="pull-right">
-                <a href="<?= site_url('siswa/add') ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah data</a>
-                <a href="<?= site_url('siswa/cetak') ?>" class="btn btn-info"><i class="fa fa-print"></i> Cetak data</a>
-                <a href="<?= site_url('siswa/impor') ?>" class="btn btn-success"><i class="fa fa-table"></i> Impor data</a>
+                <dl class="dl-horizontal">
+                    <?= form_open_multipart('siswa/import') ?>
+                        <dt><button type="submit" class="btn btn-success"><i class="fa fa-table"></i> Import</button></dt>
+                        <dd><input type="file" class="form-control-file" id="importexcel" name="importexcel" accept=".xlsx,.xls"></dd>
+                    <?= form_close(); ?>
+                    <dt><a href="<?= site_url('siswa/cetak') ?>" class="btn btn-info"><i class="fa fa-print"></i> Cetak data</a></dt>
+                    <dd><a href="<?= site_url('siswa/add') ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah data</a></dd>
+                </dl> 
             </div>
         </div>
         <div class="box-body table-responsive">

@@ -12,7 +12,7 @@
         <br>
 
         <body>
-            <table border="1" style="width: 80%">
+            <table border="1" width="90%" cellspacing="0" cellpadding="1">
                 <tr>
                     <th>No.</th>
                     <th>Jenis Eskul</th>

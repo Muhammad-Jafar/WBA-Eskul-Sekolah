@@ -37,4 +37,16 @@ class Nilai_model extends CI_Model {
         $this->db->set('tgl_penilaian', 'NOW()', FALSE);
         $this->db->where('id_pendaftaran', $post['id_pendaftaran'])->update('nilai', $set);
     }
+
+    public function cetak_nilai() {
+        $id_ekskul = $this->session->userdata('pembina_ekskul');
+        $q = $this->db->select('n.*, s.nama_siswa, s.nis, s.kelas, s.jurusan, je.nama_ekskul')
+                    ->from('nilai as n')
+                    ->join('pendaftaran as p', 'p.id_pendaftaran = n.id_pendaftaran', 'LEFT')
+                    ->join('siswa as s', 's.id_siswa = p.id_siswa', 'LEFT')
+                    ->join('jenis_eskul as je', 'je.id_ekskul = p.id_ekskul', 'LEFT')
+                    ->where('p.id_ekskul', $id_ekskul)
+                    ->order_by('n.total', 'DESC')->get()->result();
+        return $q;
+    }
 }

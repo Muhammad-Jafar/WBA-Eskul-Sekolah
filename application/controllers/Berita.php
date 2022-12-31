@@ -21,6 +21,7 @@ class Berita extends CI_Controller {
         $berita->judul = null;
         $berita->keterangan = null;
         $data = [ 'page' => 'add', 'row' => $berita ];
+        if ($this)
         $this->template->load('template', 'berita/berita_form', $data);
     }
 
@@ -54,7 +55,7 @@ class Berita extends CI_Controller {
         $this->berita_model->delete($id);
 
         if ($this->db->affected_rows() > 0) {
-            echo "<script>alert('data berhasil di hapus');</script>";
+            echo "<script>alert('Data berhasil di hapus');</script>";
         }
         redirect('berita');
     }

@@ -14,7 +14,7 @@ class Siswa extends CI_Controller {
 			redirect( site_url('auth/login') );
 		});
     }
-
+    
     public function index(){
         $data['row'] = $this->siswa_model->get();
         $this->template->load('template', 'siswa/siswa_data', $data);
@@ -107,47 +107,45 @@ class Siswa extends CI_Controller {
         $this->load->view('siswa/siswa_print', $data);
     }
 
-    public function impor() {
-        $this->load->view('siswa/siswa_impor');
+    public function import() {
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'xlsx|xls';
+        $config['file_name'] = 'doc' . time();
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload('importexcel')) {
+            $file = $this->upload->data();
+            $reader = ReaderEntityFactory::createXLSXReader();
 
-        // $config['upload_path'] = './uploads/';
-        // $config['allowed_types'] = 'xlsx|xls';
-        // $config['file_name'] = 'doc' . time();
-        // $this->load->library('upload', $config);
-        // if ($this->upload->do_upload('importexcel')) {
-        //     $file = $this->upload->data();
-        //     $reader = ReaderEntityFactory::createXLSXReader();
+            $reader->open('uploads/' . $file['file_name']);
 
-        //     $reader->open('uploads/' . $file['file_name']);
-
-        //     foreach ($reader->getSheetIterator() as $sheet) {
-        //         $numRow = 1;
-        //         foreach ($sheet->getRowIterator() as $row) {
-        //             if ($numRow > 1) {
-        //                 $siswa = array(
-        //                     'nama_siswa' => $row->getCellAtIndex(1),
-        //                     'nis' => $row->getCellAtIndex(2),
-        //                     'jenis_kelamin' => $row->getCellAtIndex(3),
-        //                     'kelas' => $row->getCellAtIndex(4),
-        //                     'ttl' => $row->getCellAtIndex(5),
-        //                     'no_hp' => $row->getCellAtIndex(6),
-        //                     'username' => $row->getCellAtIndex(7),
-        //                     'password' => md5($row->getCellAtIndex(8)),
-        //                     'id_level' => $row->getCellAtIndex(9),
-        //                 );
-        //                 $this->siswa_model->import_data($siswa);
-        //             }
-        //             $numRow++;
-        //         }
-        //         $reader->close();
-        //         unlink('uploads/' . $file['file_name']);
-        //         echo "<script>
-        //         alert('data berhasil di tambahkan');
-        //         window.location='" . site_url('siswa') . "';
-        //         </script>";
-        //     }
-        // } else {
-        //     echo "error :" . $this->upload->display_errors();
-        // };
+            foreach ($reader->getSheetIterator() as $sheet) {
+                $numRow = 1;
+                foreach ($sheet->getRowIterator() as $row) {
+                    if ($numRow > 1) {
+                        $siswa = array(
+                            'nama_siswa' => $row->getCellAtIndex(1),
+                            'nis' => $row->getCellAtIndex(2),
+                            'jenis_kelamin' => $row->getCellAtIndex(3),
+                            'kelas' => $row->getCellAtIndex(4),
+                            'ttl' => $row->getCellAtIndex(5),
+                            'no_hp' => $row->getCellAtIndex(6),
+                            'username' => $row->getCellAtIndex(7),
+                            'password' => md5($row->getCellAtIndex(8)),
+                            'id_level' => $row->getCellAtIndex(9),
+                        );
+                        $this->siswa_model->import_data($siswa);
+                    }
+                    $numRow++;
+                }
+                $reader->close();
+                unlink('uploads/' . $file['file_name']);
+                echo "<script>
+                alert('data berhasil di tambahkan');
+                window.location='" . site_url('siswa') . "';
+                </script>";
+            }
+        } else {
+            echo "error :" . $this->upload->display_errors();
+        };
     }
 }

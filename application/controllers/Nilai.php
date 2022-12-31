@@ -46,4 +46,9 @@ class Nilai extends CI_Controller {
             redirect('nilai');
         }
     }
+
+    public function cetak() {
+        $data['row'] = $this->nilai_model->cetak_nilai();
+        $this->load->view('nilai/nilai_print', $data);
+    }
 }

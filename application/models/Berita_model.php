@@ -4,9 +4,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Berita_model extends CI_Model {
 
     public function get($id = null) {
-        $q = $this->db->get('berita');
+        $q = $this->db->from('berita');
         if ($id != null) { $this->db->where('id_berita', $id); }
-        return $q;
+        return $q->get();
     }
 
     public function add($post) {

@@ -11,10 +11,10 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Data Penilaian Siswa</h3>
-                <div class="pull-right"><a href="" class="btn btn-success"><i class="fa fa-print"></i> Cetak Data</a></div>
+                <div class="pull-right"><a href="<?= site_url('nilai/cetak') ?>" class="btn btn-success"><i class="fa fa-print"></i> Cetak Data</a></div>
             </div>
             <div class="box-body table-responsive">
-                <table class="table table-bordered table-striped text-center" id="datatable">
+                <table class="table table-striped text-center" id="datatable">
                     <thead>
                         <tr>
                             <th>No.</th>

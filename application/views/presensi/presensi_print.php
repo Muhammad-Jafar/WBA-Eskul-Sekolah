@@ -9,7 +9,7 @@
 <center>
     <br> <h2>Data Presensi Siswa Yang Mengambil Ekstrakurikuler  </h2> <br>
     <body>
-        <table border=".2" style="width: 80%">
+        <table border="1" width="90%" cellspacing="0" cellpadding="1">
             <tr>
                 <th>No.</th>
                 <th>Nama</th>

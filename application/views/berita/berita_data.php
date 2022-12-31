@@ -22,6 +22,7 @@
                         <th>Judul Berita</th>
                         <th>Deskripsi Berita</th>
                         <th>Tanggal Pos</th>
+                        <th>ID</th>
                         <th>Aktivitas</th>
                         <th>Data</th>
                     </tr>
@@ -33,6 +34,7 @@
                             <td><?= $data->judul ?></td>
                             <td><?= $data->keterangan ?></td>
                             <td><?= $data->tanggal_pos ?></td>
+                            <td><?= $data->id_berita ?></td>
                             <td width="22%">
                                 <?php if ($data->status_berita == 'Usai') : ?>
                                     <a href="#" class="btn btn-default disabled"><i class="fa fa-check"> ditampilkan</i></a>

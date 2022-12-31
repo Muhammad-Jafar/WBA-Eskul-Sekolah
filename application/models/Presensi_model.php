@@ -4,22 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Presensi_model extends CI_Model {
     
     /* Untuk pembina */
-    public function cetak_data_presensi() {
-        $id_ekskul = $this->session->userdata('pembina_ekskul');
-        $q = $this->db->select('pr.id_presensi, pr.id_pendaftaran, pr.presensi_point, pr.status_presensi, pr.tgl_presensi,
-                                s.nama_siswa, s.nis, s.jenis_kelamin, s.ttl, s.no_hp, s.kelas, s.jurusan, je.nama_ekskul, 
-                                p.status_pendaftaran, pm.id_ekskul')
-                    ->from('presensi as pr')
-                    ->join('pendaftaran as p', 'p.id_pendaftaran = pr.id_pendaftaran', 'LEFT')
-                    ->join('pembina as pm', 'pm.id_ekskul = p.id_ekskul', 'LEFT')
-                    ->join('siswa as s', 's.id_siswa = p.id_siswa', 'LEFT')
-                    ->join('jenis_eskul as je', 'je.id_ekskul = p.id_ekskul', 'LEFT')
-                    ->where('p.status_pendaftaran', 'LULUS')
-                    ->where('pm.id_ekskul', $id_ekskul)
-                    ->order_by('s.nama_siswa', 'ASC')->get();
-        return $q;
-    }
-
     public function pembina_set_presensi($id = null) {
         $id_ekskul = $this->session->userdata('pembina_ekskul');
         $q = $this->db->select('pr.id_presensi, pm.id_ekskul, pr.id_pendaftaran, pr.presensi_point, pr.status_presensi, pr.tgl_presensi,
@@ -34,6 +18,22 @@ class Presensi_model extends CI_Model {
                     ->where('pm.id_ekskul', $id_ekskul)
                     ->order_by('s.nama_siswa', 'ASC')->get();
         if ($id != null) { $this->db->where('id_siswa', $id); }
+        return $q;
+    }
+    
+    public function cetak_data_presensi() {
+        $id_ekskul = $this->session->userdata('pembina_ekskul');
+        $q = $this->db->select('pr.id_presensi, pr.id_pendaftaran, pr.presensi_point, pr.status_presensi, pr.tgl_presensi,
+                                s.nama_siswa, s.nis, s.jenis_kelamin, s.ttl, s.no_hp, s.kelas, s.jurusan, je.nama_ekskul, 
+                                p.status_pendaftaran, pm.id_ekskul')
+                    ->from('presensi as pr')
+                    ->join('pendaftaran as p', 'p.id_pendaftaran = pr.id_pendaftaran', 'LEFT')
+                    ->join('pembina as pm', 'pm.id_ekskul = p.id_ekskul', 'LEFT')
+                    ->join('siswa as s', 's.id_siswa = p.id_siswa', 'LEFT')
+                    ->join('jenis_eskul as je', 'je.id_ekskul = p.id_ekskul', 'LEFT')
+                    ->where('p.status_pendaftaran', 'LULUS')
+                    ->where('pm.id_ekskul', $id_ekskul)
+                    ->order_by('s.nama_siswa', 'ASC')->get();
         return $q;
     }
 
