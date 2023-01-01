@@ -13,14 +13,14 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     </head>
 
-    <body class="hold-transition login-page">
+    <body class="hold-transition login-page" style="background-image: url('../uploads/assets/bg-school.jpg'); background-size: cover; background-repeat: no-repeat;">
         <div class="login-box">
+            <div class="login-logo">
+                <img src="../uploads/assets/logo-school.jpg" style="width:30%" alt="User Image">
+                <h4><b>SMAN 1 Moyo Utara</b></h4>  
+            </div>
             <div class="login-box-body">
-                <div class="login-logo">
-                    <h4><b>Aplikasi Pendaftaran Ekstrakurikuler</b></h4>
-                    <h4>SMAN 1 Moyo Utara</h4>  
-                </div>
-                <h4 class="login-box-msg"><b>SELAMAT DATANG,</b></h4>
+                <h4 class="login-box-msg"><b>Aplikasi Pendaftaran Ekstrakurikuler</b></h4>
                 <p class="login-box-msg">Silahkan masuk Untuk Memulai</p>
                 <?= form_open('auth/process', array('method' => 'post')); ?>
                 <!-- <form action="<?= site_url('auth/process') ?>" method="post"> -->
